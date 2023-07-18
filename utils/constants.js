@@ -2,7 +2,7 @@
 export const ODONATA_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWZkODA2ZGVmZGZkZjU5YjFmMjYwOWM4ZWUzNjQ2NjZkZTY2MTI3YTYyMzQxNWI1NDMwYzkzNThjNjAxZWY3YyJ9fX0="
 
 // Prefix
-export const CLIENT_PREFIX = "§1[§9AQN§1]§r "
+export const CLIENT_PREFIX = "§1[§9AQ§1]§r "
 
 // Entities
 export const ArmorStand = Java.type("net.minecraft.entity.item.EntityArmorStand")
