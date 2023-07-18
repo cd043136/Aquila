@@ -196,6 +196,23 @@ class settings {
         subcategory: "FPS"
     })
     cullParticles = false;
+
+    // RIFT
+    @SwitchProperty({
+        name: "Berberis Helper",
+        description: "Draws a box around harvestable berberis bush",
+        category: "Rift",
+        subcategory: "Dreadfarm"
+    })
+    berberisHelper = false;
+
+    @SwitchProperty({
+        name: "Reduce Berberis Particles",
+        description: "Reduces the amount of particles from berberis bushes",
+        category: "Rift",
+        subcategory: "Dreadfarm"
+    })
+    reduceBerberisParticles = false;
 }
 
 export default new settings
