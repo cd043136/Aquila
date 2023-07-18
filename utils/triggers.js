@@ -26,3 +26,14 @@ register("tick", () => {
         }
     }
 })
+
+const forgeTriggers = []
+export const addForgeTrigger = (t) => {
+    forgeTriggers.push(t)
+}
+
+register("gameUnload", () => {
+    for (let i = 0; i < forgeTriggers.length; i++) {
+        triggers[i]()  // unregister
+    }
+})
