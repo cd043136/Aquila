@@ -8,6 +8,8 @@ import "./utils/forgeevents"
 
 import "./features/debug/sound"
 
+import "./features/dungeons/starmobs"
+
 import "./features/general/logo"
 
 register("command", (...args) => {

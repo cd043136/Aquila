@@ -80,6 +80,23 @@ class settings {
     moveLogo() {
         this.logoMoveGui.open()
     };
+
+    // DUNGEONS
+    @SwitchProperty({
+        name: "Box Star Mobs",
+        description: "Draws a box around starred mobs",
+        category: "Dungeons",
+        subcategory: "Star Mobs"
+    })
+    boxStarMobs = false;
+
+    @ColorProperty({
+        name: "Star Mobs Colour",
+        description: "Star mobs box colour",
+        category: "Dungeons",
+        subcategory: "Star Mobs"
+    })
+    starMobsColor = new Color(1, 0, 0, 1);
 }
 
 export default new settings
