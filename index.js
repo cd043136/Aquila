@@ -85,9 +85,9 @@ register("command", (...args) => {
 }).setName("aquila").setAliases("aq")
 
 register("gameLoad", () => {
-    if (data.apikey == "none") clientWarning(`NO API KEY! SET USING: ${Format.RESET}${Colour.RED}/aqn setkey <key>${Format.RESET}${Colour.RED}${Format.BOLD}`)
+    if (data.apikey == "none") clientWarning(`NO API KEY! SET USING: ${Format.RESET}${Colour.RED}/aq setkey <key>${Format.RESET}${Colour.RED}${Format.BOLD}`)
 })
 
 register("worldLoad", () => {
-    if (data.apikey == "none") clientWarning(`NO API KEY! SET USING: ${Format.RESET}${Colour.RED}/aqn setkey <key>${Format.RESET}${Colour.RED}${Format.BOLD}`)
+    if (data.apikey == "none") clientWarning(`NO API KEY! SET USING: ${Format.RESET}${Colour.RED}/aq setkey <key>${Format.RESET}${Colour.RED}${Format.BOLD}`)
 })
