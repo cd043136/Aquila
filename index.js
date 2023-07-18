@@ -15,6 +15,7 @@ import "./features/dungeons/starmobs"
 import "./features/general/logo"
 
 import "./features/kuudra/tokens"
+import "./features/kuudra/kuudrapf"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
