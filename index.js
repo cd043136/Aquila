@@ -22,6 +22,7 @@ import "./features/qol/deathanim"
 import "./features/qol/entityrenders"
 
 import "./features/rift/berberis"
+import "./features/rift/odonata"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()

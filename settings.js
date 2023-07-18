@@ -213,6 +213,31 @@ class settings {
         subcategory: "Dreadfarm"
     })
     reduceBerberisParticles = false;
+
+    @SwitchProperty({
+        name: "Odonata Helper",
+        description: "Draws a box around Odonata",
+        category: "Rift",
+        subcategory: "Wyld Woods"
+    })
+    odonataHelper = false;
+
+    @ColorProperty({
+        name: "Odonata Helper Colour",
+        description: "Odonata box colour",
+        category: "Rift",
+        subcategory: "Wyld Woods"
+    })
+    odonataColor = new Color(1, 0, 0, 1);
+
+    @SwitchProperty({
+        name: "Suppress Travel Sound",
+        description: "Mutes the portal sound that plays when travelling to a new location",
+        category: "Rift",
+        subcategory: "General"
+    })
+    suppressTravelSound = false;
+
 }
 
 export default new settings
