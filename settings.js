@@ -146,6 +146,56 @@ class settings {
         category: "QOL"
     })
     noDeathAnimation = false;
+
+    @SwitchProperty({
+        name: "Aggressive Culling",
+        description: "Stops rendering a lot of stuff when they are too far away. Improves performance",
+        category: "QOL",
+        subcategory: "FPS"
+    })
+    aggroCulling = false;
+
+    @SliderProperty({
+        name: "Culling Distance",
+        description: "Distance at which entities will be culled",
+        category: "QOL",
+        subcategory: "FPS",
+        min: 5,
+        max: 60
+    })
+    cullingDistance = 30;
+
+    @SwitchProperty({
+        name: "Cull Entities",
+        description: "Some Kuudra mobs will not be culled, like crates",
+        category: "QOL",
+        subcategory: "FPS"
+    })
+    cullEntities = false;
+
+    @SwitchProperty({
+        name: "Include Players",
+        description: "Include players as part of entity culling",
+        category: "QOL",
+        subcategory: "FPS"
+    })
+    cullPlayers = false;
+
+    @SwitchProperty({
+        name: "Cull Tile Entities",
+        description: "Currently this culls all tile entities regardless of distance for some reason",
+        category: "QOL",
+        subcategory: "FPS"
+    })
+    cullTileEntities = false;
+
+    @SwitchProperty({
+        name: "Cull Particles",
+        description: "Does nothing right now as it keeps causing crashes",
+        category: "QOL",
+        subcategory: "FPS"
+    })
+    cullParticles = false;
 }
 
 export default new settings

@@ -19,6 +19,7 @@ import "./features/kuudra/kuudrapf"
 
 import "./features/qol/coords"
 import "./features/qol/deathanim"
+import "./features/qol/entityrenders"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
