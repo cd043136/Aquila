@@ -17,7 +17,29 @@ import {
 })
 
 class settings {
-    constructor() { }
+    constructor() {
+        this.initialize(this)
+    }
+
+    logoMoveGui = new Gui()
+
+    @SwitchProperty({
+        name: "Display Logo",
+        description: "Displays the AQN logo. lol",
+        category: "General",
+        subcategory: "Logo"
+    })
+    displayLogo = false;
+
+    @ButtonProperty({
+        name: "Move Logo",
+        description: "Move logo position",
+        category: "General",
+        subcategory: "Logo"
+    })
+    moveLogo() {
+        this.logoMoveGui.open()
+    };
 }
 
 export default new settings
