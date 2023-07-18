@@ -1,7 +1,9 @@
 import settings from "./settings"
 import axios from "../axios"
 import { clientChat } from "./utils/utils"
+import { data } from "./data/pog"
 
+import "./data/location"
 import "./utils/slayer"
 import "./utils/triggers"
 import "./utils/forgeevents"
@@ -11,6 +13,8 @@ import "./features/debug/sound"
 import "./features/dungeons/starmobs"
 
 import "./features/general/logo"
+
+import "./features/kuudra/tokens"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()

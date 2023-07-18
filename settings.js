@@ -26,6 +26,7 @@ class settings {
     }
 
     logoMoveGui = new Gui()
+    tokenGui = new Gui()
 
     // DEBUG
     @SwitchProperty({
@@ -97,6 +98,39 @@ class settings {
         subcategory: "Star Mobs"
     })
     starMobsColor = new Color(1, 0, 0, 1);
+
+    // KUUDRA
+    @SwitchProperty({
+        name: "Token Shop Helper",
+        description: "Some Kuudra token shop QOL",
+        category: "Kuudra",
+    })
+    tokenShopHelper = false;
+
+    @ButtonProperty({
+        name: "Move Token Text",
+        description: "Move token text position",
+        category: "Kuudra",
+    })
+    moveTokenText() {
+        this.tokenGui.open()
+    };
+
+    @SwitchProperty({
+        name: "Show Kuudra Completions",
+        description: "Shows player kuudra completions upon joining the party",
+        category: "Kuudra",
+        subcategory: "Party Finder"
+    })
+    showKuudraCompletions = false;
+
+    @SwitchProperty({
+        name: "Compact Kuudra Stats",
+        description: "Compacts kuudra stats into one line",
+        category: "Kuudra",
+        subcategory: "Party Finder"
+    })
+    compactKuudraStats = false;
 }
 
 export default new settings
