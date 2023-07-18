@@ -26,6 +26,7 @@ import "./features/rift/odonata"
 import "./features/rift/sound"
 
 import "./features/slayer/warps"
+import "./features/slayer/miniboss"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()

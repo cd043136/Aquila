@@ -244,17 +244,42 @@ class settings {
     @SwitchProperty({
         name: "Warp Shortcut",
         description: `Enables short commands to warp to slayer locations:\n
-        ${Colour.GREEN}/ws:${Format.RESET} warp sepulture\n
-        ${Colour.GREEN}/wc:${Format.RESET} warp crypt\n
-        ${Colour.GREEN}/wa:${Format.RESET} warp arachne\n
-        ${Colour.GREEN}/wh:${Format.RESET} warp howl\n
-        ${Colour.GREEN}/ww:${Format.RESET} warp wiz\n
-        ${Colour.GREEN}/wsm:${Format.RESET} warp smold\n
+    ${Colour.GREEN}/ws:${Format.RESET} warp sepulture\n
+    ${Colour.GREEN}/wc:${Format.RESET} warp crypt\n
+    ${Colour.GREEN}/wa:${Format.RESET} warp arachne\n
+    ${Colour.GREEN}/wh:${Format.RESET} warp howl\n
+    ${Colour.GREEN}/ww:${Format.RESET} warp wiz\n
+    ${Colour.GREEN}/wsm:${Format.RESET} warp smold\n
 ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override any mod commands of the same name.`,
         category: "Slayer",
         subcategory: "QOL"
     })
     warpShortcut = false;
+
+    @SwitchProperty({
+        name: "Highlight Minibosses",
+        description: "Highlights minibosses in slayer quests",
+        category: "Slayer",
+        subcategory: "Visuals"
+    })
+    highlightMinibosses = false;
+
+    @SelectorProperty({
+        name: "Fill Type",
+        description: "How minibosses should be highlighted",
+        category: "Slayer",
+        subcategory: "Visuals",
+        options: ["Fill", "Box"]
+    })
+    fillType = 0;
+
+    @SwitchProperty({
+        name: "Miniboss Ping",
+        description: "Plays a sound when a miniboss spawns, same feature as soopy's but less reliable XD",
+        category: "Slayer",
+        subcategory: "QOL"
+    })
+    minibossPing = false;
 }
 
 export default new settings
