@@ -80,7 +80,6 @@ export const Colour = {
     LIGHT_PURPLE: "§d",
     YELLOW: "§e",
     WHITE: "§f",
-    OBFUSCATED: "§k",
 }
 
 export const Format = {
@@ -89,4 +88,5 @@ export const Format = {
     BOLD: "§l",
     STRIKETHROUGH: "§m",
     RESET: "§r",
+    OBFUSCATED: "§k"
 }

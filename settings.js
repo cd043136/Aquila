@@ -25,6 +25,12 @@ class settings {
         this.addDependency("Sound Distance", "Debug Sounds")
         this.addDependency("Include Sounds", "Debug Sounds")
         this.addDependency("Exclude Sounds", "Debug Sounds")
+
+        this.addDependency("Culling Distance", "Aggressive Culling")
+        this.addDependency("Cull Entities", "Aggressive Culling")
+        this.addDependency("Include Players", "Aggressive Culling")
+        this.addDependency("Cull Tile Entities", "Aggressive Culling")
+        this.addDependency("Cull Particles", "Aggressive Culling")
     }
 
     logoMoveGui = new Gui()

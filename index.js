@@ -11,6 +11,8 @@ import "./utils/slayer"
 import "./utils/triggers"
 import "./utils/forgeevents"
 
+import "./features/update/updatecheck"
+
 import "./features/debug/sound"
 
 import "./features/dungeons/starmobs"
