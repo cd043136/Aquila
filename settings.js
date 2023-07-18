@@ -139,6 +139,13 @@ class settings {
         category: "QOL"
     })
     displayCoords = false;
+
+    @SwitchProperty({
+        name: "No Death Animation",
+        description: "Disables entity death animation",
+        category: "QOL"
+    })
+    noDeathAnimation = false;
 }
 
 export default new settings
