@@ -1,7 +1,6 @@
 import PogObject from '../../PogData'
 
 export let data = new PogObject("Aquila", {
-    version: "1.0.0",
     location: "none",
     area: "none",
     apikey: "none",
