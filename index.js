@@ -17,6 +17,8 @@ import "./features/general/logo"
 import "./features/kuudra/tokens"
 import "./features/kuudra/kuudrapf"
 
+import "./features/qol/coords"
+
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
 

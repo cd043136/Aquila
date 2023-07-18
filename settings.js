@@ -131,6 +131,14 @@ class settings {
         subcategory: "Party Finder"
     })
     compactKuudraStats = false;
+
+    // QOL
+    @SwitchProperty({
+        name: "Coordinates",
+        description: "Display coordinates on screen",
+        category: "QOL"
+    })
+    displayCoords = false;
 }
 
 export default new settings
