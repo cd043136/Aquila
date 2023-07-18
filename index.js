@@ -1,8 +1,10 @@
 import settings from "./settings"
 import axios from "../axios"
-import { clientChat } from "./utils/utils"
+import { clientChat, clientWarning } from "./utils/utils"
 import { data } from "./data/pog"
 import { Colour, Format } from "./utils/constants"
+// BIG TODO: osu! in minecraft pog
+// another TODO: docstrings for functions
 
 import "./data/location"
 import "./utils/slayer"
