@@ -6,9 +6,11 @@ import "./utils/slayer"
 import "./utils/triggers"
 import "./utils/forgeevents"
 
+import "./features/debug/sound"
+
 import "./features/general/logo"
 
-register("command", () => {
+register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
 
     else if (args[0] == "help" || args[0] == "commands") {
