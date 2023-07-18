@@ -29,6 +29,7 @@ class settings {
 
     logoMoveGui = new Gui()
     tokenGui = new Gui()
+    hitphaseGui = new Gui()
 
     // DEBUG
     @SwitchProperty({
@@ -257,6 +258,22 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
     warpShortcut = false;
 
     @SwitchProperty({
+        name: "Point to Boss",
+        description: "Draws an arrow pointing to the boss, useful for low fov / high ping eman slaying",
+        category: "Slayer",
+        subcategory: "Visuals"
+    })
+    pointToBoss = false;
+
+    @SwitchProperty({
+        name: "Suppress Eman TP",
+        description: "Stops the boss from teleporting (visual)",
+        category: "Slayer",
+        subcategory: "Visuals"
+    })
+    suppressEmanTp = false;
+
+    @SwitchProperty({
         name: "Highlight Minibosses",
         description: "Highlights minibosses in slayer quests",
         category: "Slayer",
@@ -280,6 +297,32 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
         subcategory: "QOL"
     })
     minibossPing = false;
+
+    @SwitchProperty({
+        name: "Phase Display",
+        description: "Displays text showing voidgloom hits remaining, beacon, and laser timers",
+        category: "Slayer",
+        subcategory: "Voidgloom"
+    })
+    phaseDisplay = false;
+
+    @ButtonProperty({
+        name: "Move Phase Text",
+        description: "Move hit phase text position",
+        category: "Slayer",
+        subcategory: "Voidgloom"
+    })
+    moveHitPhaseText() {
+        ChatLib.command("mvhit", true)
+    };
+
+    @SwitchProperty({
+        name: "Beacon Helper",
+        description: "Draws a path to the beacon as it flies",
+        category: "Slayer",
+        subcategory: "Voidgloom"
+    })
+    beaconHelper = false;
 }
 
 export default new settings

@@ -27,6 +27,7 @@ import "./features/rift/sound"
 
 import "./features/slayer/warps"
 import "./features/slayer/miniboss"
+import "./features/slayer/eman"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
