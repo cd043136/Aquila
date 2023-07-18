@@ -25,6 +25,8 @@ import "./features/rift/berberis"
 import "./features/rift/odonata"
 import "./features/rift/sound"
 
+import "./features/slayer/warps"
+
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
 

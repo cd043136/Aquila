@@ -9,6 +9,8 @@ import {
     @TextProperty
 } from '../Vigilance'
 
+import { Colour, Format } from "./utils/constants"
+
 @Vigilant("Aquila", "Aquila", {
     getCategoryComparator: () => (a, b) => {
         const categories = ["General", "Dungeons", "Rift", "Kuudra", "Slayer", "QOL", "Debug"]
@@ -238,6 +240,21 @@ class settings {
     })
     suppressTravelSound = false;
 
+    // SLAYER
+    @SwitchProperty({
+        name: "Warp Shortcut",
+        description: `Enables short commands to warp to slayer locations:\n
+        ${Colour.GREEN}/ws:${Format.RESET} warp sepulture\n
+        ${Colour.GREEN}/wc:${Format.RESET} warp crypt\n
+        ${Colour.GREEN}/wa:${Format.RESET} warp arachne\n
+        ${Colour.GREEN}/wh:${Format.RESET} warp howl\n
+        ${Colour.GREEN}/ww:${Format.RESET} warp wiz\n
+        ${Colour.GREEN}/wsm:${Format.RESET} warp smold\n
+${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override any mod commands of the same name.`,
+        category: "Slayer",
+        subcategory: "QOL"
+    })
+    warpShortcut = false;
 }
 
 export default new settings
