@@ -29,6 +29,7 @@ registerWhen(register("tick", () => {
 
     // get appropriate boss stands - run once
     if (spawnedByStand === undefined) {
+        // spawnedByStand will ALWAYS be the correct one
         spawnedByStand = stands.find(e => e.getName().includes(Player.getName()) && e.getName().includes("Spawned by"))
 
         if (spawnedByStand === undefined) {
@@ -40,7 +41,8 @@ registerWhen(register("tick", () => {
         }
     }
 
-    if (bossStand === undefined) {
+    // self-correcting hopefully
+    if (bossStand === undefined || distance2D(bossStand.getX(), bossStand.getZ(), spawnedByStand.getX(), spawnedByStand.getZ()) >= 1) {
         bossStand = stands.find(e => e.getName().includes(" Seraph") && e.distanceTo(spawnedByStand) < 3)
 
         if (bossStand === undefined) {
@@ -51,7 +53,7 @@ registerWhen(register("tick", () => {
     }
 
     // attempt to find the actual enderman entity
-    if (bossEntity === undefined) {
+    if (bossEntity === undefined || distance2D(bossEntity.getX(), bossEntity.getZ(), spawnedByStand.getX(), spawnedByStand.getZ()) >= 1) {
         const emans = World.getAllEntitiesOfType(Enderman.class).filter(
             e => distance2D(e.getX(), e.getZ(), bossStand.getX(), bossStand.getZ()) < 1.5 &&
                 Math.abs(e.getY() - bossStand.getY()) < 4
