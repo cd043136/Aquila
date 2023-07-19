@@ -15,7 +15,7 @@ let bossEntity = undefined
 
 // laser timer
 let inLaser = false
-let laserTimer = 8.00 // 8 seconds
+let laserTimer = 8
 
 // beacon
 let holdingBeacon = false
@@ -72,13 +72,17 @@ registerWhen(register("tick", () => {
         if (bossEntity.getEntity().func_70115_ae()) {  // isRiding
             if (!inLaser) {
                 inLaser = true
-                laserTimer = 8.00  // just in case
+                laserTimer = 8  // just in case
             }
             if (laserTimer >= 0.05) laserTimer -= 0.05
         }
         else {
-            inLaser = false
-            laserTimer = 8.00
+            // sometimes boss can stop riding for a split second after
+            // entering laser phase. this fixes that
+            if (laserTimer < 5) {
+                inLaser = false
+                laserTimer = 8
+            }
         }
 
         // beacon phase
@@ -278,7 +282,7 @@ register("chat", () => {
         bossStand = undefined
         bossEntity = undefined
         inLaser = false
-        laserTimer = 8.00
+        laserTimer = 8
         beaconPoints = []
         beaconArmorStand = undefined
         holdingBeacon = false
