@@ -8,18 +8,28 @@ Name inspired from AQN :tf: (not affiliated or anything, just for fun)
 You need ChatTriggers to run this module. Get it at https://www.chattriggers.com/
 1. Download the .zip file from the [latest release](https://github.com/cd043136/Aquila/releases/tag/Latest)
 2. In Minecraft, type `/ct files` which opens the ChatTriggers folder:
+
 ![](https://i.imgur.com/zQKb4tB.png)
+
 3. Head to the `modules` folder
 4. Open the downloaded zip file and drag the `Aquila` folder into the modules folder
+
 ![](https://i.imgur.com/wNa7sCs.png)
+
 5. Run `/ct load`
 6. Open settings with `/aq`
 
 ## Updates
+### Method 1:
 - To update, save a copy of your config and data files (located at `Aquila/config.toml` and `Aquila/data/data.json` respectively) somewhere
 - Delete the `Aquila` folder in the modules folder (or `/ct delete Aquila`)
 - Download the latest release and follow the installation steps above
 - Before opening Minecraft, copy your config and data files back into the `Aquila` folder at their respective locations
+
+### Method 2:
+Alternatively, open the zip of the updated release and drag the `Aquila` folder into the modules folder, replacing the old one. This will not delete your config and data files. It may cause some issues (very unlikely) however.
+
+![](https://i.imgur.com/z8g5A81.png)
 
 ## Features
 ### Dungeon
