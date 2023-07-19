@@ -1,4 +1,5 @@
 import axios from "../../../axios"
+import settings from "../../settings"
 import { Colour, Format } from "../../utils/constants"
 import { clientChat } from "../../utils/utils"
 
@@ -11,7 +12,7 @@ let suppressUpdate = false
 register("worldLoad", () => {
     if (suppressUpdate) return
 
-    if (!lastUpdate || new Date().getTime() - lastUpdate.getTime() > 300000) { // check every 5 mins
+    if (!lastUpdate || new Date().getTime() - lastUpdate.getTime() > settings.updateCheckInterval * 60000) {
         if (!lastUpdate) lastUpdate = new Date()
         checkUpdate()
     }
