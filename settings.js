@@ -306,7 +306,9 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
 
     @SwitchProperty({
         name: "Phase Display",
-        description: "Displays text showing voidgloom hits remaining, beacon, and laser timers",
+        description: `
+Displays text showing voidgloom hits remaining, beacon, and laser timers.
+${Format.ITALIC}${Colour.RED}If the wrong boss is highlighted, punch the correct boss to fix it.`,
         category: "Slayer",
         subcategory: "Voidgloom"
     })

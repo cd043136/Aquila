@@ -29,7 +29,6 @@ registerWhen(register("tick", () => {
 
     // get appropriate boss stands - run once
     if (spawnedByStand === undefined) {
-        // spawnedByStand will ALWAYS be the correct one
         spawnedByStand = stands.find(e => e.getName().includes(Player.getName()) && e.getName().includes("Spawned by"))
 
         if (spawnedByStand === undefined) {
@@ -41,8 +40,7 @@ registerWhen(register("tick", () => {
         }
     }
 
-    // self-correcting hopefully
-    if (bossStand === undefined || distance2D(bossStand.getX(), bossStand.getZ(), spawnedByStand.getX(), spawnedByStand.getZ()) >= 1) {
+    if (bossStand === undefined) {
         bossStand = stands.find(e => e.getName().includes(" Seraph") && e.distanceTo(spawnedByStand) < 3)
 
         if (bossStand === undefined) {
@@ -53,7 +51,7 @@ registerWhen(register("tick", () => {
     }
 
     // attempt to find the actual enderman entity
-    if (bossEntity === undefined || distance2D(bossEntity.getX(), bossEntity.getZ(), spawnedByStand.getX(), spawnedByStand.getZ()) >= 1) {
+    if (bossEntity === undefined) {
         const emans = World.getAllEntitiesOfType(Enderman.class).filter(
             e => distance2D(e.getX(), e.getZ(), bossStand.getX(), bossStand.getZ()) < 1.5 &&
                 Math.abs(e.getY() - bossStand.getY()) < 4
@@ -218,6 +216,17 @@ registerWhen(register("renderWorld", () => {
 
     // CHANGE checkfunc if other stuff is added
 }), () => slayerFightCheck() && bossStand !== undefined && (settings.pointToBoss || settings.beaconHelper))
+
+register("attackEntity", (entity) => {
+    if (!slayerFightCheck() || !bossEntity) return
+
+    // check if we selected the wrong boss
+    if (entity.getEntity() instanceof Enderman && entity.getUUID() !== bossEntity.getUUID()) {
+        bossEntity = undefined
+        bossStand = undefined
+        spawnedByStand = undefined
+    }
+})
 
 const normalisedEntityCoords = (entityX, entityZ) => {
     /*return {
