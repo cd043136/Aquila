@@ -230,17 +230,6 @@ registerWhen(register("renderWorld", () => {
     // CHANGE checkfunc if other stuff is added
 }), () => slayerFightCheck() && bossStand !== undefined && (settings.pointToBoss || settings.beaconHelper))
 
-register("attackEntity", (entity) => {
-    if (!slayerFightCheck() || !bossEntity) return
-
-    // check if we selected the wrong boss
-    if (entity.getEntity() instanceof Enderman && entity.getUUID() !== bossEntity.getUUID()) {
-        bossEntity = undefined
-        bossStand = undefined
-        spawnedByStand = undefined
-    }
-})
-
 const normalisedEntityCoords = (entityX, entityZ) => {
     /*return {
         x: Player.getRenderX() + (entityX - Player.getRenderX()) / 3,
