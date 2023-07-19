@@ -5,15 +5,15 @@ export let data = new PogObject("Aquila", {
     area: "none",
     apikey: "none",
     logo: {
-        x: 20,
+        x: 885,
         y: 20
     },
     token_location: {
-        x: 20,
-        y: 20
+        x: 540,
+        y: 205
     },
     hit_phase_location: {
-        x: 20,
-        y: 20
+        x: 450,
+        y: 280
     }
 }, "data/data.json")

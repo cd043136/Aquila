@@ -6,7 +6,7 @@ import { addForgeTrigger, registerWhen } from "../../utils/triggers"
 import { ArmorStand, EnderTeleportEvent, Enderman, EventPriority } from "../../utils/constants"
 import { drawLine, guiMoveHelper } from "../../utils/render"
 import { Colour, Format } from "../../utils/constants"
-import { clientChat, distance2D } from "../../utils/utils"
+import { clientChat, distance2D, removeUnicode } from "../../utils/utils"
 import { registerForge } from "../../utils/forgeevents"
 
 let spawnedByStand = undefined
@@ -15,7 +15,7 @@ let bossEntity = undefined
 
 // laser timer
 let inLaser = false
-let laserTimer = 8.00 // 8 seconds
+let laserTimer = 8
 
 // beacon
 let holdingBeacon = false
@@ -24,12 +24,15 @@ let beaconArmorStand = undefined
 let beaconPoints = []
 let beaconBlock = undefined
 
+// hp
+let hp = ""
+
 registerWhen(register("tick", () => {
     const stands = World.getAllEntitiesOfType(ArmorStand.class)
 
-    // get appropriate boss stands
     spawnedByStand = stands.find(e => e.getName().includes(Player.getName()) && e.getName().includes("Spawned by"))
     if (spawnedByStand === undefined) {
+        // still can't find boss
         bossStand = undefined
         bossEntity = undefined
         beaconArmorStand = undefined
@@ -38,9 +41,17 @@ registerWhen(register("tick", () => {
 
     bossStand = stands.find(e => e.getName().includes(" Seraph") && e.distanceTo(spawnedByStand) < 3)
     if (bossStand === undefined) {
+        hp = ""
         bossEntity = undefined
         beaconArmorStand = undefined
         return
+
+    }
+    else {
+        // boss hp stuff
+        if (bossStand.getName().includes("❤")) {
+            hp = bossStand.getName().split(" ")[3]
+        } else hp = ""
     }
 
     // attempt to find the actual enderman entity
@@ -57,7 +68,6 @@ registerWhen(register("tick", () => {
         else if (emans.length > 1) return // retry
         else {
             bossEntity = emans[0]
-            // clientChat("found boss entity")
         }
     }
 
@@ -66,13 +76,17 @@ registerWhen(register("tick", () => {
         if (bossEntity.getEntity().func_70115_ae()) {  // isRiding
             if (!inLaser) {
                 inLaser = true
-                laserTimer = 8.00  // just in case
+                laserTimer = 8  // just in case
             }
             if (laserTimer >= 0.05) laserTimer -= 0.05
         }
         else {
-            inLaser = false
-            laserTimer = 8.00
+            // sometimes boss can stop riding for a split second after
+            // entering laser phase. this fixes that
+            if (laserTimer < 5) {
+                inLaser = false
+                laserTimer = 8
+            }
         }
 
         // beacon phase
@@ -131,11 +145,16 @@ registerWhen(register("tick", () => {
         }
     }
 
-}), () => slayerFightCheck() && (settings.phaseDisplay || settings.pointToBoss))
+}), () => slayerFightCheck() && (settings.phaseDisplay || settings.pointToBoss || settings.beaconHelper))
 
 registerWhen(register("renderOverlay", () => {
     if (bossStand === undefined) return
     let overlayStr = ""
+
+    // hp
+    if (hp !== "") {
+        overlayStr += `${hp}\n`
+    }
 
     // hit phase thing
     if (bossStand.getName().includes("Hits")) {
@@ -255,17 +274,13 @@ register("dragged", (dx, dy, x, y, btn) => {
     }
 })
 
-register("command", () => {
-    settings.hitphaseGui.open()
-}).setName("mvhit")
-
 register("chat", () => {
     setTimeout(() => {
         spawnedByStand = undefined
         bossStand = undefined
         bossEntity = undefined
         inLaser = false
-        laserTimer = 8.00
+        laserTimer = 8
         beaconPoints = []
         beaconArmorStand = undefined
         holdingBeacon = false

@@ -13,7 +13,7 @@ import { Colour, Format } from "./utils/constants"
 
 @Vigilant("Aquila", "Aquila", {
     getCategoryComparator: () => (a, b) => {
-        const categories = ["General", "Dungeons", "Rift", "Kuudra", "Slayer", "QOL", "Debug"]
+        const categories = ["General", "QOL", "Dungeons", "Rift", "Kuudra", "Slayer", "Debug"]
         return categories.indexOf(a.name) - categories.indexOf(b.name)
     }
 })
@@ -90,6 +90,19 @@ class settings {
     moveLogo() {
         this.logoMoveGui.open()
     };
+
+    @SliderProperty({
+        name: "Update Check Interval",
+        description: `
+Update checks are done whenever you switch worlds (e.g. from warping) if the last check was more than ${Colour.GREEN}_ minutes${Format.RESET} ago.
+
+Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates when you switch worlds.`,
+        category: "General",
+        subcategory: "Updates",
+        min: 0,
+        max: 60
+    })
+    updateCheckInterval = 5;
 
     // DUNGEONS
     @SwitchProperty({
@@ -297,6 +310,14 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
     fillType = 0;
 
     @SwitchProperty({
+        name: "Boss Alert",
+        description: "Alerts you when your boss spawned",
+        category: "Slayer",
+        subcategory: "QOL"
+    })
+    bossAlert = false;
+
+    @SwitchProperty({
         name: "Miniboss Ping",
         description: "Plays a sound when a miniboss spawns, same feature as soopy's but less reliable XD",
         category: "Slayer",
@@ -306,7 +327,7 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
 
     @SwitchProperty({
         name: "Phase Display",
-        description: "Displays text showing voidgloom hits remaining, beacon, and laser timers",
+        description: "Displays text showing voidgloom HP, hits remaining, beacon, and laser timers",
         category: "Slayer",
         subcategory: "Voidgloom"
     })
@@ -319,7 +340,7 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
         subcategory: "Voidgloom"
     })
     moveHitPhaseText() {
-        ChatLib.command("mvhit", true)
+        this.hitphaseGui.open()
     };
 
     @SwitchProperty({
