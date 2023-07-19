@@ -1,6 +1,8 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "changelog": [
-        "Initial Release"
+        "Fixed some eman overlay bugs",
+        "Added boss spawn/kill alert",
+        "Added better default overlay locations"
     ]
 }
