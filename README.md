@@ -14,6 +14,13 @@ You need ChatTriggers to run this module. Get it at https://www.chattriggers.com
 ![](https://i.imgur.com/wNa7sCs.png)
 5. Run `/ct load`
 6. Open settings with `/aq`
+
+## Updates
+- To update, save a copy of your config and data files (located at `Aquila/config.toml` and `Aquila/data/data.json` respectively) somewhere
+- Delete the `Aquila` folder in the modules folder (or `/ct delete Aquila`)
+- Download the latest release and follow the installation steps above
+- Before opening Minecraft, copy your config and data files back into the `Aquila` folder at their respective locations
+
 ## Features
 ### Dungeon
 
