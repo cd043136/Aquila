@@ -319,7 +319,7 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
         subcategory: "Voidgloom"
     })
     moveHitPhaseText() {
-        ChatLib.command("mvhit", true)
+        this.hitphaseGui.open()
     };
 
     @SwitchProperty({

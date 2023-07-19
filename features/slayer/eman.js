@@ -27,20 +27,27 @@ let beaconBlock = undefined
 registerWhen(register("tick", () => {
     const stands = World.getAllEntitiesOfType(ArmorStand.class)
 
-    // get appropriate boss stands
-    spawnedByStand = stands.find(e => e.getName().includes(Player.getName()) && e.getName().includes("Spawned by"))
+    // get appropriate boss stands - run once
     if (spawnedByStand === undefined) {
-        bossStand = undefined
-        bossEntity = undefined
-        beaconArmorStand = undefined
-        return
+        spawnedByStand = stands.find(e => e.getName().includes(Player.getName()) && e.getName().includes("Spawned by"))
+
+        if (spawnedByStand === undefined) {
+            // still can't find boss
+            bossStand = undefined
+            bossEntity = undefined
+            beaconArmorStand = undefined
+            return
+        }
     }
 
-    bossStand = stands.find(e => e.getName().includes(" Seraph") && e.distanceTo(spawnedByStand) < 3)
     if (bossStand === undefined) {
-        bossEntity = undefined
-        beaconArmorStand = undefined
-        return
+        bossStand = stands.find(e => e.getName().includes(" Seraph") && e.distanceTo(spawnedByStand) < 3)
+
+        if (bossStand === undefined) {
+            bossEntity = undefined
+            beaconArmorStand = undefined
+            return
+        }
     }
 
     // attempt to find the actual enderman entity
@@ -57,7 +64,6 @@ registerWhen(register("tick", () => {
         else if (emans.length > 1) return // retry
         else {
             bossEntity = emans[0]
-            // clientChat("found boss entity")
         }
     }
 
@@ -131,7 +137,7 @@ registerWhen(register("tick", () => {
         }
     }
 
-}), () => slayerFightCheck() && (settings.phaseDisplay || settings.pointToBoss))
+}), () => slayerFightCheck() && (settings.phaseDisplay || settings.pointToBoss || settings.beaconHelper))
 
 registerWhen(register("renderOverlay", () => {
     if (bossStand === undefined) return
@@ -254,10 +260,6 @@ register("dragged", (dx, dy, x, y, btn) => {
         data.save()
     }
 })
-
-register("command", () => {
-    settings.hitphaseGui.open()
-}).setName("mvhit")
 
 register("chat", () => {
     setTimeout(() => {
