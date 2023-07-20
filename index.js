@@ -7,9 +7,11 @@ import { Colour, Format } from "./utils/constants"
 // another TODO: docstrings for functions
 
 import "./data/location"
+
 import "./utils/slayer"
 import "./utils/triggers"
 import "./utils/forgeevents"
+import "./utils/render"
 
 import "./features/update/updatecheck"
 
@@ -18,6 +20,7 @@ import "./features/debug/sound"
 import "./features/dungeons/starmobs"
 
 import "./features/general/logo"
+import "./features/general/spam"
 
 import "./features/kuudra/tokens"
 import "./features/kuudra/kuudrapf"
@@ -88,9 +91,11 @@ register("command", (...args) => {
 }).setName("aquila").setAliases("aq")
 
 register("gameLoad", () => {
+    data.last_load = new Date().getTime()
     if (data.apikey == "none") clientWarning(`NO API KEY! SET USING: ${Format.RESET}${Colour.RED}/aq setkey <key>${Format.RESET}${Colour.RED}${Format.BOLD}`)
 })
 
 register("worldLoad", () => {
+    data.last_unload = new Date().getTime()
     if (data.apikey == "none") clientWarning(`NO API KEY! SET USING: ${Format.RESET}${Colour.RED}/aq setkey <key>${Format.RESET}${Colour.RED}${Format.BOLD}`)
 })

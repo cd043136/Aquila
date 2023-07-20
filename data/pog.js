@@ -4,6 +4,8 @@ export let data = new PogObject("Aquila", {
     location: "none",
     area: "none",
     apikey: "none",
+    last_load: 0,
+    last_unload: 0,
     logo: {
         x: 885,
         y: 20
@@ -15,5 +17,9 @@ export let data = new PogObject("Aquila", {
     hit_phase_location: {
         x: 450,
         y: 280
+    },
+    spam_text_location: {
+        x: 710,
+        y: 390
     }
 }, "data/data.json")

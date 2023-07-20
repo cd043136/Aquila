@@ -36,6 +36,7 @@ class settings {
     logoMoveGui = new Gui()
     tokenGui = new Gui()
     hitphaseGui = new Gui()
+    spamChatGui = new Gui()
 
     // DEBUG
     @SwitchProperty({
@@ -155,6 +156,33 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
     compactKuudraStats = false;
 
     // QOL
+    @SwitchProperty({
+        name: "Spam Hider",
+        description: "Hides spammy messages like Implosion dmg etc",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    spamHider = false;
+
+    @SelectorProperty({
+        name: "Hide Type",
+        description: "How spammy messages should be hidden",
+        category: "QOL",
+        subcategory: "Spam",
+        options: ["Hide completely", "Separate chat"]
+    })
+    hideType = 0;
+
+    @ButtonProperty({
+        name: "Move Spam Text",
+        description: "Move where spam text is displayed if 'Separate chat' option is selected",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    moveSpamText() {
+        this.spamChatGui.open()
+    };
+
     @SwitchProperty({
         name: "Coordinates",
         description: "Display coordinates on screen",
