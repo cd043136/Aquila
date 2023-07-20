@@ -67,8 +67,7 @@ Alternatively, open the zip of the updated release and drag the `Aquila` folder 
 
 ![](https://i.imgur.com/wiivzVc.png)
 
-- Boss & Miniboss Alert
-- Miniboss Highlight
+- Miniboss alert & highlight
 
 ![](https://i.imgur.com/Y3AS0R9.png)
 
@@ -82,6 +81,9 @@ Alternatively, open the zip of the updated release and drag the `Aquila` folder 
 - Display coordinates on screen
 - Death animation toggle
 - Entity culling
+- Spam text hider
+
+![](https://i.imgur.com/bbh7gPh.png)
 
 ### Misc
 
