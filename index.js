@@ -36,7 +36,6 @@ import "./features/rift/sound"
 import "./features/slayer/warps"
 import "./features/slayer/miniboss"
 import "./features/slayer/eman"
-import "./features/slayer/bossalert"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()

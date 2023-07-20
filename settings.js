@@ -338,14 +338,6 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
     fillType = 0;
 
     @SwitchProperty({
-        name: "Boss Alert",
-        description: "Alerts you when your boss spawned",
-        category: "Slayer",
-        subcategory: "QOL"
-    })
-    bossAlert = false;
-
-    @SwitchProperty({
         name: "Miniboss Ping",
         description: "Plays a sound when a miniboss spawns, same feature as soopy's but less reliable XD",
         category: "Slayer",

@@ -93,15 +93,16 @@ export const Format = {
 
 export const spamRegex = [
     /There are blocks in the way!/,
-    /Your (.+) hit (.+) enem(y|(ies)) for (.+) damage./,
+    /Your (.+) hit (.+) enem(y|(ies)) for (.+) damage\./,
     /You are playing on profile: (.+)/,
     /Profile ID: (.+)/,
     /Not enough mana! (Costs (.+) mana)/,
     /\+(.+) Kill Combo (.+)/,
-    /Sending to server (.+).../,
+    /Sending to server (.+)\.\.\./,
     /You earned (.+) GEXP from playing SkyBlock!/,
     /Your Kill Combo has expired! You reached a (.+) Kill Combo!/,
     /Warping.../,
     /You summoned your (.+)!/,
-    /Unknown command. Type "\/help" for help./
+    /Unknown command\. Type "\/help" for help./,
+    /This ability is on cooldown for (.+)/
 ]
