@@ -99,10 +99,13 @@ export const spamRegex = [
     /Not enough mana! (Costs (.+) mana)/,
     /\+(.+) Kill Combo (.+)/,
     /Sending to server (.+)\.\.\./,
-    /You earned (.+) GEXP from playing SkyBlock!/,
+    /You earned (.+) from playing SkyBlock!/,
     /Your Kill Combo has expired! You reached a (.+) Kill Combo!/,
-    /Warping.../,
+    /Warping\.\.\./,
     /You summoned your (.+)!/,
     /Unknown command\. Type "\/help" for help./,
-    /This ability is on cooldown for (.+)/
+    /This ability is on cooldown for (.+)/,
+    /Your active Potion Effects have been paused and stored\. They will be restored when you leave Dungeons\! You are not allowed to use existing Potion Effects while in Dungeons\./,
+    /(.+) is ready to use\! Press (.+) to activate it\!/,
+
 ]

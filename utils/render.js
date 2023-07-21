@@ -42,10 +42,8 @@ registerWhen(register("tick", () => {
     // if opacity is 0, remove it from the array
     texts.map(t => {
         t.opacity = t.opacity >= SPEED ? t.opacity - SPEED : 0
-        if (t.opacity === 0) {
-            texts.splice(texts.indexOf(t), 1)
-        }
     })
+    texts.filter(t => t.opacity > 0)
 }), () => settings.spamHider)
 
 export const addTextToSpam = (msg) => {
@@ -57,13 +55,14 @@ export const addTextToSpam = (msg) => {
 
 export const spamChatDisplay = () => {
     let offset = 9 * texts.length
-    texts.forEach(t => {
-        // draw string at x, y + offset
-        // Renderer.fixAlpha(Renderer.color(255, 255, 255, t.opacity > 255 ? 255 : t.opacity))
-        Renderer.colorize(255, 255, 255, t.opacity > 255 ? 255 : t.opacity)
+    const textsCopy = [...texts]
+
+    for (let t of textsCopy) {
+        Renderer.fixAlpha(Renderer.color(255, 255, 255, t.opacity))
+        Renderer.colorize(255, 255, 255, t.opacity)
         Renderer.drawString(t.text, data.spam_text_location.x, data.spam_text_location.y + offset, true)
         offset -= 9
-    })
+    }
     offset = 9 * texts.length
     // reset color
     Renderer.colorize(255, 255, 255, 255)
