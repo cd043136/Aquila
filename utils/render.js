@@ -43,7 +43,9 @@ registerWhen(register("tick", () => {
     texts.map(t => {
         t.opacity = t.opacity >= SPEED ? t.opacity - SPEED : 0
     })
-    texts.filter(t => t.opacity > 0)
+    texts.map(t => {
+        if (t.opacity <= 0) texts.splice(texts.indexOf(t), 1)
+    })
 }), () => settings.spamHider)
 
 export const addTextToSpam = (msg) => {
