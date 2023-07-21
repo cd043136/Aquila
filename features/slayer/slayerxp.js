@@ -4,6 +4,7 @@ import { getSlayer, slayerLocationCheck } from "../../utils/slayer"
 import { registerWhen } from "../../utils/triggers"
 import { clientChat, numToComma } from "../../utils/utils"
 import { Colour, Format, SlayerXP } from "../../utils/constants"
+import { guiMoveHelper } from "../../utils/render"
 
 let slayer = {
     name: "",
@@ -53,9 +54,18 @@ register("chat", (s, lvl, remaining) => {
     slayer.remaining = Infinity
 }).setCriteria("   ${s} LVL ${lvl} - LVL MAXED OUT!")
 
-register("command", () => {
-    clientChat(`Slayer: ${slayer.name} tier ${slayer.tier}. Remaining: ${slayer.remaining}XP (${slayer.remainingBoss} bosses)`)
-}).setName("txp")
+register("dragged", (dx, dy, x, y, button) => {
+    if (settings.slayerOvGui.isOpen()) {
+
+        data.slayer_overlay_location.x = parseInt(x)
+        data.slayer_overlay_location.y = parseInt(y)
+        data.save()
+    }
+})
+
+registerWhen(register("renderOverlay", () => {
+    guiMoveHelper(data.slayer_overlay_location.x, data.slayer_overlay_location.y, slayer.name === "")
+}), () => settings.slayerOvGui.isOpen())
 
 const reset = () => {
     slayer.name = ""

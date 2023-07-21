@@ -31,6 +31,10 @@ class settings {
         this.addDependency("Include Players", "Aggressive Culling")
         this.addDependency("Cull Tile Entities", "Aggressive Culling")
         this.addDependency("Cull Particles", "Aggressive Culling")
+
+        this.addDependency("Hide Type", "Spam Hider")
+
+        this.addDependency("Move Overlay", "Progress Overlay")
     }
 
     logoMoveGui = new Gui()
