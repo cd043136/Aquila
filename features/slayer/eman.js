@@ -50,7 +50,13 @@ registerWhen(register("tick", () => {
     else {
         // boss hp stuff
         if (bossStand.getName().includes("❤")) {
-            hp = bossStand.getName().split(" ")[3]
+            // ☠ Voidgloom Seraph ᛤ 276k❤
+            if (bossStand.getName().includes("ᛤ")) {
+                // get the last 2 words
+                // use .join and .split
+                hp = bossStand.getName().split(" ").slice(-2).join(" ")
+            }
+            else hp = bossStand.getName().split(" ")[bossStand.getName().split(" ").length - 1]
         } else hp = ""
     }
 
@@ -159,8 +165,10 @@ registerWhen(register("renderOverlay", () => {
     // hit phase thing
     if (bossStand.getName().includes("Hits")) {
         // ☠ Voidgloom Seraph 30 Hits
+        // ☠ Voidgloom Seraph ᛤ 12 Hits
         const cleanName = ChatLib.removeFormatting(bossStand.getName())
-        const hits = parseInt(cleanName.split(" ")[3])
+        // get the 2nd last word
+        const hits = parseInt(cleanName.split(" ")[cleanName.split(" ").length - 2])
         const c = hits > 75 ? Colour.GREEN : hits > 50 ? Colour.YELLOW : hits > 25 ? Colour.GOLD : Colour.RED
         overlayStr += `${Format.BOLD}${c}${hits}${Format.RESET}${Colour.GRAY} Hits${Format.RESET}\n`
     }
