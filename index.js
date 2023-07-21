@@ -41,54 +41,86 @@ import "./features/slayer/slayerxp"
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
 
-    else if (args[0] == "help" || args[0] == "commands") {
-        // TODO: make this look nicer
-        let helpStr = " \n- /aq setkey <api key> - sets the api key for the mod\n"
-        helpStr += "- /aq testkey - tests the api key\n"
-        helpStr += "- /aq (help|commands) - shows this message\n"
-        clientChat(helpStr)
-    }
+    else {
+        switch (args[0]) {
+            case "help":
+            case "commands":
+                let helpStr = " \n- /aq setkey <api key> - sets the api key for the mod\n"
+                helpStr += "- /aq testkey - tests the api key\n"
+                helpStr += "- /aq (help|commands) - shows this message\n"
+                clientChat(helpStr)
+                break
 
-    else if (args[0] == "setkey" && args[1] != undefined) {
-        const akey = args[1]
-        const testurl = `https://api.hypixel.net/skyblock/news?key=${akey}`
-        // test key
-        axios.get(testurl, {
-            headers: {
-                "User-Agent": "Mozilla/5.0 (ChatTriggers)"
-            }
-        })
-            .then(res => {
-                clientChat(`${Colour.GREEN}${Format.BOLD}Successfully set API key!`)
-                data.apikey = akey
-                data.save()
-            })
-            .catch(err => {
-                if (err.code == 403) clientWarning(`${Colour.RED}${Format.BOLD}Invalid API key!`)
-                else clientWarning(`${Colour.RED}${Format.BOLD}Error setting API key! Code: ${err.code}`)
-            })
-    }
+            case "setkey":
+                if (args[1]) {
+                    const akey = args[1]
+                    const testurl = `https://api.hypixel.net/skyblock/news?key=${akey}`
+                    // test key
+                    axios.get(testurl, {
+                        headers: {
+                            "User-Agent": "Mozilla/5.0 (ChatTriggers)"
+                        }
+                    })
+                        .then(res => {
+                            clientChat(`${Colour.GREEN}${Format.BOLD}Successfully set API key!`)
+                            data.apikey = akey
+                            data.save()
+                        })
+                        .catch(err => {
+                            if (err.code == 403) clientWarning(`${Colour.RED}${Format.BOLD}Invalid API key!`)
+                            else clientWarning(`${Colour.RED}${Format.BOLD}Error setting API key! Code: ${err.code}`)
+                        })
+                }
+                break
 
-    else if (args[0] == "testkey") {
-        const testurl = `https://api.hypixel.net/skyblock/news?key=${data.apikey}`
-        axios.get(testurl, {
-            headers: {
-                "User-Agent": "Mozilla/5.0 (ChatTriggers)"
-            }
-        })
-            .then(res => {
-                clientChat(`${Colour.GREEN}API key is valid!`)
-            })
-            .catch(err => {
-                clientWarning(`${Colour.RED}API key is invalid!`)
-            })
-    }
+            case "testkey":
+                const testurl = `https://api.hypixel.net/skyblock/news?key=${data.apikey}`
+                axios.get(testurl, {
+                    headers: {
+                        "User-Agent": "Mozilla/5.0 (ChatTriggers)"
+                    }
+                })
+                    .then(res => {
+                        clientChat(`${Colour.GREEN}API key is valid!`)
+                    })
+                    .catch(err => {
+                        clientWarning(`${Colour.RED}API key is invalid!`)
+                    })
+                break
 
-    else if (args[0] == "getkey") {
-        ChatLib.command(`ct copy ${data.apikey}`, true)
-        clientChat(`${Colour.GREEN}API key copied to clipboard!`)
+            case "getkey":
+                ChatLib.command(`ct copy ${data.apikey}`, true)
+                clientChat(`${Colour.GREEN}API key copied to clipboard!`)
+                break
+
+            case "col":
+            case "color":
+            case "colour":
+                ChatLib.chat(colourMsg())
+                break
+        }
     }
 }).setName("aquila").setAliases("aq")
+
+const colourMsg = () => {
+    return `
+§0BLACK
+§1DARK_BLUE
+§2DARK_GREEN
+§3DARK_AQUA
+§4DARK_RED
+§5DARK_PURPLE
+§6GOLD
+§7GRAY
+§DARK_GRAY
+§9BLUE
+§aGREEN
+§bAQUA
+§cRED
+§dLIGHT_PURPLE
+§eYELLOW
+§fWHITE`
+}
 
 register("gameLoad", () => {
     data.last_load = new Date().getTime()

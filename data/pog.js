@@ -21,5 +21,9 @@ export let data = new PogObject("Aquila", {
     spam_text_location: {
         x: 710,
         y: 390
-    }
+    },
+    slayer_overlay_location: {
+        x: 20,
+        y: 50
+    },
 }, "data/data.json")

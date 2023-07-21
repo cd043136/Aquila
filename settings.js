@@ -37,6 +37,7 @@ class settings {
     tokenGui = new Gui()
     hitphaseGui = new Gui()
     spamChatGui = new Gui()
+    slayerOvGui = new Gui()
 
     // DEBUG
     @SwitchProperty({
@@ -305,6 +306,34 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
     warpShortcut = false;
 
     @SwitchProperty({
+        name: "Miniboss Ping",
+        description: "Plays a sound when a miniboss spawns, same feature as soopy's but less reliable XD",
+        category: "Slayer",
+        subcategory: "QOL"
+    })
+    minibossPing = false;
+
+    @SwitchProperty({
+        name: "Progress Overlay",
+        description: `
+Displays slayer progress on screen (remaining bosses, xp, etc). Requires you to complete one slayer quest first.
+${Colour.RED}Inaccurate during Aatrox bonus slayer XP perk!${Format.RESET}`,
+        category: "Slayer",
+        subcategory: "QOL"
+    })
+    progressOverlay = false;
+
+    @ButtonProperty({
+        name: "Move Overlay",
+        description: "Move slayer progress overlay position",
+        category: "Slayer",
+        subcategory: "QOL"
+    })
+    moveOverlay() {
+        this.slayerOvGui.open()
+    }
+
+    @SwitchProperty({
         name: "Point to Boss",
         description: "Draws an arrow pointing to the boss, useful for low fov / high ping eman slaying",
         category: "Slayer",
@@ -336,14 +365,6 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
         options: ["Fill", "Box"]
     })
     fillType = 0;
-
-    @SwitchProperty({
-        name: "Miniboss Ping",
-        description: "Plays a sound when a miniboss spawns, same feature as soopy's but less reliable XD",
-        category: "Slayer",
-        subcategory: "QOL"
-    })
-    minibossPing = false;
 
     @SwitchProperty({
         name: "Phase Display",

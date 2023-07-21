@@ -1,6 +1,24 @@
 // Texture
 export const ODONATA_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWZkODA2ZGVmZGZkZjU5YjFmMjYwOWM4ZWUzNjQ2NjZkZTY2MTI3YTYyMzQxNWI1NDMwYzkzNThjNjAxZWY3YyJ9fX0="
 
+// Roman numerals
+export const RomanNumerals = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100
+}
+
+// Slayer stuff
+export const SlayerXP = {
+    1: 5,
+    2: 25,
+    3: 100,
+    4: 500,
+    5: 1500
+}
+
 // Prefix
 export const CLIENT_PREFIX = "§1[§9AQ§1]§r "
 

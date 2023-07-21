@@ -36,6 +36,23 @@ export const getPlayerData = (uuid) => {
     })
 }
 
+const tempRomanNums = {
+    "I": 1,
+    "II": 2,
+    "III": 3,
+    "IV": 4,
+    "V": 5
+}
+export const romanToNum = (romInput) => {
+    // TODO: do this properly. for now, just use a map
+    return tempRomanNums[romInput]
+}
+
+export const numToComma = (num) => {
+    // convert 1000000 to 1,000,000
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
 //
 /* --- Some functions I used from BloomCore --- */
 //

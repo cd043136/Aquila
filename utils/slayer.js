@@ -1,5 +1,5 @@
 import { data } from "../data/pog"
-import { getMatchFromLines, getScoreboard, getTabList, removeUnicode } from "./utils"
+import { getMatchFromLines, getScoreboard, getTabList, removeUnicode, romanToNum } from "./utils"
 
 let fightinBoss = false
 let validlocation = false
@@ -11,13 +11,22 @@ register("tick", () => {
     fightinBoss = isFighting()
 })
 
-export const getSlayer = () => {
+export const getSlayer = (full = false) => {
     const sb = getScoreboard(false)
     const index = sb.findIndex(a => a.match(/Slayer Quest/))
     if (index === -1) return null
 
     // return the first 2 words of scoreboard[index]
-    return removeUnicode(sb[index - 1].split(" ").slice(0, 2).join(" "))
+    if (full) {
+        // get the 3rd word instead
+        const tier = removeUnicode(sb[index - 1].split(" ")[2])
+        const name = removeUnicode(sb[index - 1].split(" ").slice(0, 2).join(" "))
+        return {
+            tier: romanToNum(tier),
+            name: name
+        }
+    }
+    else return removeUnicode(sb[index - 1].split(" ").slice(0, 2).join(" "))
 }
 
 export const slayerLocationCheck = () => {
