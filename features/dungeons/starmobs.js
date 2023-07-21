@@ -7,12 +7,40 @@ import { ArmorStand } from "../../utils/constants"
 const ESP_NAMES = ["✯", "﴾", "Shadow Assassin", "Adventurer", "Archaeologist", "King Midas"]
 let starMobs = []
 
+
+const inStarMobs = (entity) => {
+    const copy = [...starMobs]
+    for (let i = 0; i < copy.length; i++) {
+        if (copy[i].getUUID() == entity.getUUID()) return true
+    }
+    return false
+}
+
+const getStarMobIndex = (entity) => {
+    const copy = [...starMobs]
+    for (let i = 0; i < copy.length; i++) {
+        if (copy[i].getUUID() == entity.getUUID()) return i
+    }
+    return -1
+}
+
 registerWhen(register("tick", () => {
-    starMobs = World.getAllEntitiesOfType(ArmorStand).filter(entity =>
+    const mobs = World.getAllEntitiesOfType(ArmorStand).filter(entity =>
         !entity.getName().includes(",") &&
         !entity.getName().includes("Livid") &&
         ESP_NAMES.some(a => entity.getName().includes(a))
     )
+
+    for (let mob of mobs) {
+        if (inStarMobs(mob)) continue
+        else starMobs.push(mob)
+    }
+
+    mobs.map(mob => {
+        if (mob.isDead()) {
+            starMobs.splice(getStarMobIndex(mob), 1)
+        }
+    })
 }), () => data.location == "Catacombs" && settings.boxStarMobs)
 
 registerWhen(register("renderWorld", () => {
