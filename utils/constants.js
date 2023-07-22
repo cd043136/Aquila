@@ -121,9 +121,22 @@ export const spamRegex = [
     /Your Kill Combo has expired! You reached a (.+) Kill Combo!/,
     /Warping\.\.\./,
     /You summoned your (.+)!/,
-    /Unknown command\. Type "\/help" for help./,
+    /Unknown command\. Type "\/help" for help\./,
     /This ability is on cooldown for (.+)/,
     /Your active Potion Effects have been paused and stored\. They will be restored when you leave Dungeons\! You are not allowed to use existing Potion Effects while in Dungeons\./,
+    /Your previous (.+) was removed\!/,
     /(.+) is ready to use\! Press (.+) to activate it\!/,
-
+    /(.+) is now ready\!/,
+    /(.+) selected the (.+) Dungeon Class\!/,
+    /Dungeon starts in (.+) seconds\./,
+    /Creeper Veil (A|De\-a)ctivated\!/
 ]
+
+export const mortMsgRegex = [
+    /\[NPC\] Mort\: Here\, I found this map when I first entered the dungeon\./,
+    /\[NPC\] Mort\: You should find it useful if you get lost\./,
+    /\[NPC\] Mort\: Good luck\./
+]
+
+// maybe add more specific regexes for each boss
+export const bossMsgRegex = /[BOSS] (.+)\: (.+)/
