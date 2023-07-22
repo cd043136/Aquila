@@ -54,9 +54,12 @@ register("chat", (s, lvl, remaining) => {
     slayer.remaining = Infinity
 }).setCriteria("   ${s} LVL ${lvl} - LVL MAXED OUT!")
 
+register("chat", () => {
+    reset()
+}).setCriteria("Your Slayer Quest has been cancelled!")
+
 register("dragged", (dx, dy, x, y, button) => {
     if (settings.slayerOvGui.isOpen()) {
-
         data.slayer_overlay_location.x = parseInt(x)
         data.slayer_overlay_location.y = parseInt(y)
         data.save()
@@ -68,10 +71,12 @@ registerWhen(register("renderOverlay", () => {
 }), () => settings.slayerOvGui.isOpen())
 
 const reset = () => {
-    slayer.name = ""
-    slayer.tier = 0
-    slayer.xpreward = 0
-    slayer.remaining = -1
-    slayer.remainingRaw = ""
-    slayer.remainingBoss = -1
+    slayer = {
+        name: "",
+        tier: 0,
+        xpreward: 0,
+        remaining: -1,
+        remainingRaw: "",
+        remainingBoss: -1
+    }
 }

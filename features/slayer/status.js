@@ -21,10 +21,14 @@ registerWhen(register("tick", () => {
     if (!slayerFightCheck() && spawned && !failed) {
         // quest complete msg is delayed by a bit
         const taken = ((new Date().getTime() - spawnTime) / 1000).toFixed(2)
-        clientChat(`${Colour.AQUA}Boss took ${Colour.GOLD}${taken}${Colour.AQUA}s to kill!`)
-
-        spawnTime = undefined
         spawned = false
+        spawnTime = undefined
+
+        // quest fail msg appears after dying
+        setTimeout(() => {
+            if (!failed) clientChat(`${Colour.AQUA}Boss took ${Colour.GOLD}${taken}${Colour.AQUA}s to kill!`)
+            else clientChat(`${Colour.RED} You died!`)
+        }, 500)
         return
     }
 }), () => (settings.killTimer || settings.bossSpawnAlert) && slayerLocationCheck())
