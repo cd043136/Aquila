@@ -1,6 +1,6 @@
 import settings from "../../settings"
 import { data } from "../../data/pog"
-import { spamRegex } from "../../utils/constants"
+import { bossMsgRegex, deathMsgRegex, mortMsgRegex, spamRegex } from "../../utils/constants"
 import { addTextToSpam, guiMoveHelper, spamChatDisplay } from "../../utils/render"
 import { registerWhen } from "../../utils/triggers"
 
@@ -35,5 +35,24 @@ const checkMsg = (msg) => {
     for (let i = 0; i < spamRegex.length; i++) {
         if (spamRegex[i].test(msg)) return true
     }
+
+    if (settings.hideDeathMessages) {
+        for (let i = 0; i < deathMsgRegex.length; i++) {
+            if (deathMsgRegex[i].test(msg)) return true
+        }
+    }
+
+    if (settings.hideBossMessages) {
+        for (let i = 0; i < bossMsgRegex.length; i++) {
+            if (bossMsgRegex[i].test(msg)) return true
+        }
+    }
+
+    if (settings.hideMortMessages) {
+        for (let i = 0; i < mortMsgRegex.length; i++) {
+            if (mortMsgRegex[i].test(msg)) return true
+        }
+    }
+
     return false
 }

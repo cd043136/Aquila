@@ -33,6 +33,10 @@ class settings {
         this.addDependency("Cull Particles", "Aggressive Culling")
 
         this.addDependency("Hide Type", "Spam Hider")
+        this.addDependency("Hide Death Messages", "Spam Hider")
+        this.addDependency("Hide Boss Messages", "Spam Hider")
+        this.addDependency("Hide Mort Messages", "Spam Hider")
+
 
         this.addDependency("Move Overlay", "Progress Overlay")
     }
@@ -177,6 +181,29 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
         options: ["Hide completely", "Separate chat"]
     })
     hideType = 0;
+
+    @SwitchProperty({
+        name: "Hide Death Messages",
+        description: "Hides player death messages",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    hideDeathMessages = false;
+
+    @SwitchProperty({
+        name: "Hide Boss Messages",
+        description: "Hides dungeon boss messages",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    hideBossMessages = false;
+
+    @SwitchProperty({
+        name: "Hide Mort Messages",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    hideMortMessages = false;
 
     @ButtonProperty({
         name: "Move Spam Text",

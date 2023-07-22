@@ -139,4 +139,6 @@ export const mortMsgRegex = [
 ]
 
 // maybe add more specific regexes for each boss
-export const bossMsgRegex = /[BOSS] (.+)\: (.+)/
+export const bossMsgRegex = [/[BOSS] (.+)\: (.+)/]
+
+export const deathMsgRegex = [/ ☠ (.+) was killed by (.+)\./]
