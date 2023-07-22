@@ -1,4 +1,5 @@
 import { data } from "../data/pog"
+import { ArmorStand, slayerNames } from "./constants"
 import { getMatchFromLines, getScoreboard, getTabList, removeUnicode, romanToNum } from "./utils"
 
 let fightinBoss = false
@@ -55,5 +56,22 @@ const locationCheck = () => {
 }
 
 const isFighting = () => {
-    return getScoreboard(false).findIndex(a => a.includes("Slay the boss!")) !== -1
+    // TODO: unify boss spawnby and and bossStand stuff into one class/file
+    const stands = World.getAllEntitiesOfType(ArmorStand.class)
+    const spawnby = stands.find(e => e.getName().includes(Player.getName()) && e.getName().includes("Spawned by"))
+
+    // boss armorstand exists in the world, check for hp
+    if (spawnby) {
+        const boss = stands.find(e => slayerNames.some(n => e.getName().includes(n)) && e.distanceTo(spawnby) < 3)
+
+        if (boss) {
+            const cleanName = ChatLib.removeFormatting(boss.getName())
+            const hp = removeUnicode(cleanName.split(" ")[cleanName.split(" ").length - 1])
+
+            // boss is dead
+            if (hp === "0") return false
+            return true
+        }
+    }
+    return false
 }

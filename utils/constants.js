@@ -19,6 +19,15 @@ export const SlayerXP = {
     5: 1500
 }
 
+export const slayerNames = [
+    "Voidgloom Seraph",
+    "Revenant Horror",
+    "Sven Packmaster",
+    "Tarantula Broodfather",
+    "Riftstalker Bloodfiend",
+    "Inferno Demonlord"
+]
+
 // Prefix
 export const CLIENT_PREFIX = "§1[§9AQ§1]§r "
 
