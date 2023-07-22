@@ -131,6 +131,16 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
     })
     starMobsColor = new Color(1, 0, 0, 1);
 
+    @SliderProperty({
+        name: "Distance Filter",
+        description: "Only draw boxes around star mobs within this distance",
+        category: "Dungeons",
+        subcategory: "Star Mobs",
+        min: 5,
+        max: 60
+    })
+    starMobsDistance = 30;
+
     // KUUDRA
     @SwitchProperty({
         name: "Token Shop Helper",

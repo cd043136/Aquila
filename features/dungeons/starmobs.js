@@ -28,8 +28,8 @@ registerWhen(register("tick", () => {
     const mobs = World.getAllEntitiesOfType(ArmorStand).filter(entity =>
         !entity.getName().includes(",") &&
         !entity.getName().includes("Livid") &&
-        ESP_NAMES.some(a => entity.getName().includes(a))
-    )
+        ESP_NAMES.some(a => entity.getName().includes(a)) &&
+        Player.asPlayerMP().distanceTo(entity) <= settings.starMobsDistance)
 
     for (let mob of mobs) {
         if (inStarMobs(mob)) continue
@@ -45,7 +45,6 @@ registerWhen(register("tick", () => {
 
 registerWhen(register("renderWorld", () => {
     starMobs.forEach(entity => {
-        // TODO: filter distance
         RenderLib.drawEspBox(
             entity.getRenderX(),
             entity.getRenderY() - 2,
