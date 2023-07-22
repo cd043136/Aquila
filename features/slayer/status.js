@@ -26,8 +26,10 @@ register("chat", () => {
     const taken = ((new Date().getTime() - spawnTime) / 1000).toFixed(2)
     clientChat(`${Colour.AQUA}Boss took ${Colour.GOLD}${taken}${Colour.AQUA}s to kill!`)
 
-    spawnTime = undefined
-    spawned = false
+    setTimeout(() => {
+        spawnTime = undefined
+        spawned = false
+    }, 250)
 }).setCriteria("  SLAYER QUEST COMPLETE!")
 
 register("chat", () => {
@@ -39,5 +41,13 @@ register("chat", () => {
 
 const spawnAlert = () => {
     clientWarning(`${Colour.RED} BOSS SPAWNED!`, true, "")
-    // todo: play sound
+
+    let n = 0
+    new Thread(() => {
+        while (n < 10) {
+            World.playSound("random.orb", 1, 0)
+            Thread.sleep(75)
+            n++
+        }
+    }).start()
 }
