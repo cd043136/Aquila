@@ -6,8 +6,8 @@ export const clientChat = (msg) => {
     ChatLib.chat(CLIENT_PREFIX + msg)
 }
 
-export const clientWarning = (msg, asAlert = false, subtitle = "") => {
-    if (asAlert) Client.Companion.showTitle(CLIENT_PREFIX + "§c§l" + msg, subtitle, 10, 100, 10)
+export const clientWarning = (msg, asAlert = false, subtitle = "", duration = 30) => {
+    if (asAlert) Client.showTitle(msg, subtitle, 1, duration, 1)
     else ChatLib.chat(CLIENT_PREFIX + "§c§l" + msg)
 }
 

@@ -37,6 +37,7 @@ import "./features/slayer/warps"
 import "./features/slayer/miniboss"
 import "./features/slayer/eman"
 import "./features/slayer/slayerxp"
+import "./features/slayer/status"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()

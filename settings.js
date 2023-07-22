@@ -422,6 +422,22 @@ ${Colour.RED}Inaccurate during Aatrox bonus slayer XP perk!${Format.RESET}`,
         subcategory: "Voidgloom"
     })
     beaconHelper = false;
+
+    @SwitchProperty({
+        name: "Boss Spawn Alert",
+        description: "Plays a sound and show big text on screen when the boss is spawning",
+        category: "Slayer",
+        subcategory: "Misc"
+    })
+    bossSpawnAlert = false;
+
+    @SwitchProperty({
+        name: "Kill Timer",
+        description: "Displays time taken to kill boss",
+        category: "Slayer",
+        subcategory: "Misc"
+    })
+    killTimer = false;
 }
 
 export default new settings
