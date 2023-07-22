@@ -190,6 +190,8 @@ registerWhen(register("renderOverlay", () => {
     Renderer.scale(1, 1)
 }), () => slayerFightCheck() && settings.phaseDisplay)
 
+// TODO: make point to boss a separate file
+// maybe a folder for each slayer boss?
 registerWhen(register("renderWorld", () => {
     if (settings.beaconHelper && beaconPoints.length > 1) {
         // render path
