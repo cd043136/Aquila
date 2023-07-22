@@ -10,9 +10,10 @@ import { clientChat, clientWarning } from "../../utils/utils"
 
 let spawned = false
 let spawnTime = undefined
+let failed = false
 
 registerWhen(register("tick", () => {
-    if (slayerFightCheck() && !spawned) {
+    if (slayerFightCheck() && !spawned && !failed) {
         if (settings.bossSpawnAlert) spawnAlert()
         spawned = true
         spawnTime = new Date().getTime()
@@ -23,7 +24,8 @@ registerWhen(register("tick", () => {
 register("chat", () => {
     if (!settings.killTimer || spawnTime === undefined) return
 
-    const taken = ((new Date().getTime() - spawnTime) / 1000).toFixed(2)
+    // quest complete msg is delayed by a bit
+    const taken = ((new Date().getTime() - 866 - spawnTime) / 1000).toFixed(2)
     clientChat(`${Colour.AQUA}Boss took ${Colour.GOLD}${taken}${Colour.AQUA}s to kill!`)
 
     setTimeout(() => {
@@ -37,17 +39,21 @@ register("chat", () => {
 
     spawnTime = undefined
     spawned = false
+    failed = true
+    setTimeout(() => failed = false, 500)
 }).setCriteria("  SLAYER QUEST FAILED!")
 
 const spawnAlert = () => {
     clientWarning(`${Colour.RED} BOSS SPAWNED!`, true, "")
 
     let n = 0
+    let pitch = -1
     new Thread(() => {
-        while (n < 10) {
-            World.playSound("random.orb", 1, 0)
-            Thread.sleep(75)
+        while (n <= 16) {
+            World.playSound("random.orb", 1, Math.abs(pitch))
+            Thread.sleep(38)
             n++
+            pitch += 0.1
         }
     }).start()
 }
