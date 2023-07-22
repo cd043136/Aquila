@@ -57,6 +57,7 @@ const locationCheck = () => {
 
 const isFighting = () => {
     // TODO: unify boss spawnby and and bossStand stuff into one class/file
+    // and fix voidgloom shit
     const stands = World.getAllEntitiesOfType(ArmorStand.class)
     const spawnby = stands.find(e => e.getName().includes(Player.getName()) && e.getName().includes("Spawned by"))
 
@@ -70,8 +71,10 @@ const isFighting = () => {
 
             // boss is dead
             if (hp === "0") return false
-            return true
+            else return true
         }
     }
+    // last resort
+    if (getScoreboard(false).findIndex(a => a.includes("Slay the boss!")) !== -1) return true
     return false
 }
