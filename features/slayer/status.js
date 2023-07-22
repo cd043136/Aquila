@@ -4,9 +4,7 @@ import { slayerLocationCheck, slayerFightCheck } from "../../utils/slayer"
 import { registerWhen } from "../../utils/triggers"
 import { clientChat, clientWarning } from "../../utils/utils"
 
-// to add:
-// alert when boss is about to spawn (+ sound, optional)
-// time taken to kill boss
+// TODO: fix this
 
 let spawned = false
 let spawnTime = undefined
@@ -19,9 +17,19 @@ registerWhen(register("tick", () => {
         spawnTime = new Date().getTime()
         return
     }
+
+    if (!slayerFightCheck() && spawned && !failed) {
+        // quest complete msg is delayed by a bit
+        const taken = ((new Date().getTime() - spawnTime) / 1000).toFixed(2)
+        clientChat(`${Colour.AQUA}Boss took ${Colour.GOLD}${taken}${Colour.AQUA}s to kill!`)
+
+        spawnTime = undefined
+        spawned = false
+        return
+    }
 }), () => (settings.killTimer || settings.bossSpawnAlert) && slayerLocationCheck())
 
-register("chat", () => {
+/*register("chat", () => {
     if (!settings.killTimer || spawnTime === undefined) return
 
     // quest complete msg is delayed by a bit
@@ -32,7 +40,7 @@ register("chat", () => {
         spawnTime = undefined
         spawned = false
     }, 250)
-}).setCriteria("  SLAYER QUEST COMPLETE!")
+}).setCriteria("  SLAYER QUEST COMPLETE!")*/
 
 register("chat", () => {
     if (!settings.killTimer) return
