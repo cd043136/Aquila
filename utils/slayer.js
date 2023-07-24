@@ -47,7 +47,7 @@ const locationCheck = () => {
     // Riftstalker Bloodfiend
     // Inferno Demonlord
 
-    if (getSlayer() == "Voidgloom Seraph" && (data.location == "Void Sepulture" || data.location == "Zealot Bruiser Hideout")) return true
+    if (getSlayer() == "Voidgloom Seraph" && (data.area == "The End")) return true
     if (getSlayer() == "Revenant Horror" && (data.location == "Coal Mine" || data.location == "None")) return true
     if (getSlayer() == "Sven Packmaster" && (data.location == "Ruins" || area == "The Park")) return true
     if (getSlayer() == "Tarantula Broodfather" && data.location.includes("Arachne")) return true

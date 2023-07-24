@@ -25,6 +25,11 @@ registerWhen(register("tick", () => {
     slayer.tier = slayerData.tier
     slayer.xpreward = SlayerXP[slayerData.tier]
 
+    if (slayer.remaining === -1 && data.slayer[slayerDataName(slayer.name)].remaining !== 0) {
+        slayer.remaining = data.slayer[slayerDataName(slayer.name)].remaining
+        slayer.remainingRaw = numToComma(slayer.remaining)
+    }
+
     if (slayer.remaining !== -1) slayer.remainingBoss = Math.ceil(slayer.remaining / slayer.xpreward)
 }), () => settings.progressOverlay && slayerLocationCheck())
 
@@ -48,10 +53,12 @@ registerWhen(register("renderOverlay", () => {
 register("chat", (s, lvl, remaining) => {
     slayer.remaining = parseInt(remaining.replace(/,/g, ""))
     slayer.remainingRaw = remaining
+    updateSlayerData(slayer.remaining, parseInt(lvl))
 }).setCriteria("   ${s} LVL ${lvl} - Next LVL in ${remaining} XP!")
 
 register("chat", (s, lvl, remaining) => {
     slayer.remaining = Infinity
+    updateSlayerData(undefined, 9)
 }).setCriteria("   ${s} LVL ${lvl} - LVL MAXED OUT!")
 
 register("chat", () => {
@@ -79,4 +86,32 @@ const reset = () => {
         remainingRaw: "",
         remainingBoss: -1
     }
+}
+
+const updateSlayerData = (remaining = undefined, lvl = undefined) => {
+    const name = slayerDataName(slayer.name)
+    // get slayer name
+
+
+    if (remaining && data.slayer[name].remaining !== remaining) {
+        data.slayer[name].remaining = remaining
+        data.save()
+    }
+
+    if (lvl && data.slayer[name].level !== lvl) {
+        data.slayer[name].level = lvl
+        data.save()
+    }
+}
+
+const slayerDataName = (n) => {
+    let name = null
+    if (n === "Revenant Horror") name = "rev"
+    else if (n === "Tarantula Broodfather") name = "tara"
+    else if (n === "Sven Packmaster") name = "sven"
+    else if (n === "Voidgloom Seraph") name = "eman"
+    else if (n === "Riftstalker Bloodfiend") name = "vamp"
+    else if (n === "Inferno Demonlord") name = "blaze"
+
+    return name
 }

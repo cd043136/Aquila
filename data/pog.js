@@ -26,4 +26,36 @@ export let data = new PogObject("Aquila", {
         x: 20,
         y: 50
     },
+    slayer: {
+        rev: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        eman: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        sven: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        tara: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        vamp: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        blaze: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        }
+    }
 }, "data/data.json")
