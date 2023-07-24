@@ -72,6 +72,29 @@ registerWhen(register("tick", () => {
             g: 77 / 255,
             b: 77 / 255
         })
+
+        // sven
+        else if (a.getName().includes("Sven Follower")) minis.push({
+            entity: a,
+            height: 1,
+            width: 1.1,
+            yoffset: -1,
+            // colour
+            r: 1,
+            g: 1,
+            b: 1
+        })
+
+        else if (a.getName().includes("Sven Alpha")) minis.push({
+            entity: a,
+            height: 1,
+            width: 1.1,
+            yoffset: -1,
+            // colour
+            r: 1,
+            g: 0,
+            b: 0
+        })
     }
 
     minis.map(m => {
