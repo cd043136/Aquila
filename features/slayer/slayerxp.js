@@ -23,7 +23,7 @@ registerWhen(register("tick", () => {
     }
     slayer.name = slayerData.name
     slayer.tier = slayerData.tier
-    slayer.xpreward = SlayerXP[slayerData.tier]
+    slayer.xpreward = settings.forceAatrox ? SlayerXP[slayerData.tier] * 1.25 : SlayerXP[slayerData.tier]
 
     if (slayer.remaining === -1 && data.slayer[slayerDataName(slayer.name)].remaining !== 0) {
         slayer.remaining = data.slayer[slayerDataName(slayer.name)].remaining
@@ -31,7 +31,7 @@ registerWhen(register("tick", () => {
     }
 
     if (slayer.remaining !== -1) slayer.remainingBoss = Math.ceil(slayer.remaining / slayer.xpreward)
-}), () => settings.progressOverlay && slayerLocationCheck())
+}), () => settings.progressOverlay && (settings.showEverywhere ? true : slayerLocationCheck()))
 
 registerWhen(register("renderOverlay", () => {
     let overlayText = ""
@@ -48,7 +48,7 @@ registerWhen(register("renderOverlay", () => {
     }
 
     Renderer.drawString(overlayText, data.slayer_overlay_location.x, data.slayer_overlay_location.y, true)
-}), () => settings.progressOverlay && slayerLocationCheck())
+}), () => settings.progressOverlay && (settings.showEverywhere ? true : slayerLocationCheck()))
 
 register("chat", (s, lvl, remaining) => {
     slayer.remaining = parseInt(remaining.replace(/,/g, ""))

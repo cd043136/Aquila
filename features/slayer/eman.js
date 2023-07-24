@@ -1,7 +1,7 @@
 import settings from "../../settings"
 import RenderLib from "../../../RenderLib"
 import { data } from "../../data/pog"
-import { slayerFightCheck } from "../../utils/slayer"
+import { getSlayer, slayerFightCheck } from "../../utils/slayer"
 import { addForgeTrigger, registerWhen } from "../../utils/triggers"
 import { ArmorStand, EnderTeleportEvent, Enderman, EventPriority } from "../../utils/constants"
 import { drawLine, guiMoveHelper } from "../../utils/render"
@@ -151,7 +151,7 @@ registerWhen(register("tick", () => {
         }
     }
 
-}), () => slayerFightCheck() && (settings.phaseDisplay || settings.pointToBoss || settings.beaconHelper))
+}), () => slayerFightCheck() && getSlayer() === "Voidgloom Seraph" && (settings.phaseDisplay || settings.pointToBoss || settings.beaconHelper))
 
 registerWhen(register("renderOverlay", () => {
     if (bossStand === undefined) return
@@ -188,7 +188,7 @@ registerWhen(register("renderOverlay", () => {
     Renderer.scale(2, 2)
     Renderer.drawString(overlayStr, data.hit_phase_location.x / 2, data.hit_phase_location.y / 2, true)
     Renderer.scale(1, 1)
-}), () => slayerFightCheck() && settings.phaseDisplay)
+}), () => slayerFightCheck() && getSlayer() === "Voidgloom Seraph" && settings.phaseDisplay)
 
 // TODO: make point to boss a separate file
 // maybe a folder for each slayer boss?
@@ -238,7 +238,7 @@ registerWhen(register("renderWorld", () => {
     drawLine(rightCoords.x, y, rightCoords.z, entityCoords.x, y, entityCoords.z, 1, 0, 0, 1, 3)
 
     // CHANGE checkfunc if other stuff is added
-}), () => slayerFightCheck() && bossStand !== undefined && (settings.pointToBoss || settings.beaconHelper))
+}), () => slayerFightCheck() && getSlayer() === "Voidgloom Seraph" && bossStand !== undefined && (settings.pointToBoss || settings.beaconHelper))
 
 const normalisedEntityCoords = (entityX, entityZ) => {
     /*return {

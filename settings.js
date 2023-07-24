@@ -39,6 +39,7 @@ class settings {
 
 
         this.addDependency("Move Overlay", "Progress Overlay")
+        this.addDependency("Show Everywhere", "Progress Overlay")
     }
 
     logoMoveGui = new Gui()
@@ -362,15 +363,31 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
 Displays slayer progress on screen (remaining bosses, xp, etc). Requires you to complete one slayer quest first.
 ${Colour.RED}Inaccurate during Aatrox bonus slayer XP perk!${Format.RESET}`,
         category: "Slayer",
-        subcategory: "QOL"
+        subcategory: "Overlay"
     })
     progressOverlay = false;
+
+    @SwitchProperty({
+        name: "Show Everywhere",
+        description: "Shows slayer progress overlay everywhere, not just in slayer locations",
+        category: "Slayer",
+        subcategory: "Overlay"
+    })
+    showEverywhere = false;
+
+    @SwitchProperty({
+        name: "Force Aatrox",
+        description: "Force Aatrox +25% slayer xp perk to fix 'boss remaining' count",
+        category: "Slayer",
+        subcategory: "Overlay"
+    })
+    forceAatrox = false;
 
     @ButtonProperty({
         name: "Move Overlay",
         description: "Move slayer progress overlay position",
         category: "Slayer",
-        subcategory: "QOL"
+        subcategory: "Overlay"
     })
     moveOverlay() {
         this.slayerOvGui.open()
@@ -442,14 +459,6 @@ ${Colour.RED}Inaccurate during Aatrox bonus slayer XP perk!${Format.RESET}`,
         subcategory: "Misc"
     })
     bossSpawnAlert = false;
-
-    @SwitchProperty({
-        name: "Kill Timer",
-        description: "Displays time taken to kill boss",
-        category: "Slayer",
-        subcategory: "Misc"
-    })
-    killTimer = false;
 }
 
 export default new settings
