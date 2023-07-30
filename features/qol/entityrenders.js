@@ -5,6 +5,7 @@ import { data } from "../../data/pog"
 
 registerWhen(register("renderEntity", (entity, pos, pt, event) => {
     if (entity.getClassName() == "EntityOtherPlayerMP" && !settings.cullPlayers) return
+    if (entity.getName() == "item.item.enderPearl") cancel(event)
 
     if (data.location == "Kuudra") {
         // don't cull crates

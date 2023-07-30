@@ -297,7 +297,7 @@ register("chat", () => {
         beacontime = 0
         beaconBlock = undefined
     }, 500)
-}).setCriteria(/(  SLAYER QUEST (FAILED|STARTED)!)|(Your Slayer Quest has been cancelled!)/)
+}).setCriteria(/^(  SLAYER QUEST (FAILED|STARTED)!)|(Your Slayer Quest has been cancelled!)$/)
 
 // suppress TP
 

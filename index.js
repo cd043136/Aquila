@@ -5,6 +5,7 @@ import { data } from "./data/pog"
 import { Colour, Format } from "./utils/constants"
 // BIG TODO: osu! in minecraft pog
 // another TODO: docstrings for functions
+// another TODO: dragged register all in one
 
 import "./data/location"
 
@@ -28,6 +29,7 @@ import "./features/kuudra/kuudrapf"
 import "./features/qol/coords"
 import "./features/qol/deathanim"
 import "./features/qol/entityrenders"
+import "./features/qol/dominus"
 
 import "./features/rift/berberis"
 import "./features/rift/odonata"

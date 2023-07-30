@@ -26,6 +26,10 @@ export let data = new PogObject("Aquila", {
         x: 20,
         y: 50
     },
+    dominus_timer_location: {
+        x: 366,
+        y: 423
+    },
     slayer: {
         rev: {
             level: 0,

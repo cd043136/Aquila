@@ -53,6 +53,17 @@ export const numToComma = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
+export const getArmorWearing = (entity) => {
+    const c = Player.getContainer()
+    if (c.getName() !== "container" && c.getSize() !== 45) return []
+
+    const a = []
+    for (let i = 5; i < 9; i++) {
+        a.push(c.getStackInSlot(i))
+    }
+    return a
+}
+
 //
 /* --- Some functions I used from BloomCore --- */
 //

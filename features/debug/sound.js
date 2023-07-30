@@ -6,7 +6,10 @@ import { clientChat } from "../../utils/utils"
 registerWhen(register("soundPlay", (pos, name, vol, pitch, cat, event) => {
     pp = { x: pos.getX().toFixed(2), y: pos.getY().toFixed(2), z: pos.getZ().toFixed(2) }
 
-    if (!Player.asPlayerMP() || Player.asPlayerMP().distanceTo(pp.x, pp.y, pp.z) > settings.soundDistance || name.includes("step.")) return
+    if (!Player.asPlayerMP() || name.includes("step.")) return
+    if (Player.asPlayerMP().distanceTo(pp.x, pp.y, pp.z) > settings.soundDistance) {
+        if (settings.soundDistance > 0) return
+    }
     if (settings.includeSounds && !settings.includeSounds.split(",").some(s => name.includes(s))) return
     if (settings.excludeSounds && settings.excludeSounds.split(",").some(s => name.includes(s))) return
 
