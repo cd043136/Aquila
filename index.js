@@ -40,6 +40,7 @@ import "./features/slayer/miniboss"
 import "./features/slayer/eman"
 import "./features/slayer/slayerxp"
 import "./features/slayer/alert"
+import "./features/slayer/summons"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()

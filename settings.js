@@ -49,6 +49,7 @@ class settings {
     spamChatGui = new Gui()
     slayerOvGui = new Gui()
     dominusGui = new Gui()
+    summonsGui = new Gui()
 
     // DEBUG
     @SwitchProperty({
@@ -481,6 +482,24 @@ ${Colour.RED}Inaccurate during Aatrox bonus slayer XP perk!${Format.RESET}`,
         subcategory: "Voidgloom"
     })
     beaconHelper = false;
+
+    @SwitchProperty({
+        name: "Summons HP",
+        description: "Display summons HP",
+        category: "Slayer",
+        subcategory: "Voidgloom"
+    })
+    summonsHP = false;
+
+    @ButtonProperty({
+        name: "Move Summons Text",
+        description: "Move summons HP text position",
+        category: "Slayer",
+        subcategory: "Voidgloom"
+    })
+    moveSummonsText() {
+        this.summonsGui.open()
+    };
 
     @SwitchProperty({
         name: "Boss Spawn Alert",

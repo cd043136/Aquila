@@ -30,6 +30,10 @@ export let data = new PogObject("Aquila", {
         x: 366,
         y: 423
     },
+    summons_hp_location: {
+        x: 636,
+        y: 86
+    },
     slayer: {
         rev: {
             level: 0,
