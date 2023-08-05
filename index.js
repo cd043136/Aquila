@@ -13,6 +13,7 @@ import "./utils/slayer"
 import "./utils/triggers"
 import "./utils/forgeevents"
 import "./utils/render"
+import "./utils/osu"
 
 import "./features/update/updatecheck"
 
@@ -41,6 +42,8 @@ import "./features/slayer/eman"
 import "./features/slayer/slayerxp"
 import "./features/slayer/alert"
 import "./features/slayer/summons"
+
+import "./features/osu/recent"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
@@ -116,7 +119,7 @@ const colourMsg = () => {
 §5DARK_PURPLE
 §6GOLD
 §7GRAY
-§DARK_GRAY
+§8DARK_GRAY
 §9BLUE
 §aGREEN
 §bAQUA

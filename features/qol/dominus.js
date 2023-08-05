@@ -16,20 +16,6 @@ let weaponKills = {}
 
 const DOM_SYMBOL = "ᝐ"
 
-register("command", () => {
-    const armor = getArmorWearing()
-    crimsonCount = armor.filter(
-        piece => piece !== null && removeUnicode(ChatLib.removeFormatting(piece.getName())).match(/Crimson (Leggings|Chestplate|Boots|Helmet)/)
-    ).length
-
-    ChatLib.chat("Player is wearing " + crimsonCount + " pieces of Crimson Armor")
-    ChatLib.chat("Current Dominus stack: " + currentStack)
-
-    Object.keys(weaponKills).forEach(uuid => {
-        ChatLib.chat(uuid + ": " + weaponKills[uuid])
-    })
-}).setName("test")
-
 registerWhen(register("tick", () => {
     updateCrimson()
     updateTimer()

@@ -1,3 +1,4 @@
+import { data } from "./data/pog"
 import {
     Color,
     @ColorProperty,
@@ -13,7 +14,7 @@ import { Colour, Format } from "./utils/constants"
 
 @Vigilant("Aquila", "Aquila", {
     getCategoryComparator: () => (a, b) => {
-        const categories = ["General", "QOL", "Dungeons", "Rift", "Kuudra", "Slayer", "Debug"]
+        const categories = ["General", "QOL", "Dungeons", "Rift", "Kuudra", "Slayer", "osu!", "Debug"]
         return categories.indexOf(a.name) - categories.indexOf(b.name)
     }
 })
@@ -41,6 +42,14 @@ class settings {
 
         this.addDependency("Move Overlay", "Progress Overlay")
         this.addDependency("Show Everywhere", "Progress Overlay")
+
+        //
+        this.setCategoryDescription("osu!",
+            `Runs generic osu! commands.
+
+First, set your osu! api key with ${Colour.GREEN}/osuapikey <key>${Format.RESET}
+
+Beatmap data is cached. If it starts taking up too much space, you can clear them with ${Colour.RED}/clearosucache${Format.RESET} or with the button below.`)
     }
 
     logoMoveGui = new Gui()
@@ -508,6 +517,34 @@ ${Colour.RED}Inaccurate during Aatrox bonus slayer XP perk!${Format.RESET}`,
         subcategory: "Misc"
     })
     bossSpawnAlert = false;
+
+    // osu
+    @SwitchProperty({
+        name: "Enable osu! Commands",
+        description: `Available commands:
+${Colour.GREEN}>rs|r <username>${Format.RESET} - Displays recent score for <username>
+${Colour.GREEN}>osu|profile <username>${Format.RESET} - Displays osu! profile for <username>`,
+        category: "osu!"
+    })
+    enableOsuCommands = false;
+
+    @SwitchProperty({
+        name: "Hide command messages",
+        description: "Hides your commands (>rs, >osu, etc) from chat",
+        category: "osu!"
+    })
+    hideCommandMessages = true;
+
+    @ButtonProperty({
+        name: "Clear Beatmap Cache",
+        description: "Clears cached beatmaps data",
+        category: "osu!"
+    })
+    clearBeatmapCache() {
+        data.osu_cache.beatmaps = {}
+        data.save()
+        clientChat("Cleared!")
+    }
 }
 
 export default new settings

@@ -4,6 +4,7 @@ export let data = new PogObject("Aquila", {
     location: "none",
     area: "none",
     apikey: "none",
+    osu_apikey: "none",
     last_load: 0,
     last_unload: 0,
     logo: {
@@ -65,5 +66,8 @@ export let data = new PogObject("Aquila", {
             xp: 0,
             remaining: 0
         }
+    },
+    osu_cache: {
+        beatmaps: {}
     }
 }, "data/data.json")

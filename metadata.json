@@ -8,6 +8,7 @@
         "PogData",
         "Vigilance",
         "RenderLib",
-        "axios"
+        "axios",
+        "PromiseV2"
     ]
 }

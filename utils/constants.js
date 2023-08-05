@@ -149,5 +149,17 @@ export const mortMsgRegex = [
 
 // maybe add more specific regexes for each boss
 export const bossMsgRegex = [/[BOSS] (.+)\: (.+)/]
-
 export const deathMsgRegex = [/ ☠ (.+) was killed by (.+)\./]
+
+// osu stuff
+export const RANKS = {
+    "F": `${Format.BOLD}${Colour.GRAY}Failed${Format.RESET}`,
+    "D": `${Format.BOLD}${Colour.RED}D${Format.RESET}`,
+    "C": `${Format.BOLD}${Colour.YELLOW}C${Format.RESET}`,
+    "B": `${Format.BOLD}${Colour.BLUE}B${Format.RESET}`,
+    "A": `${Format.BOLD}${Colour.GREEN}A${Format.RESET}`,
+    "S": `${Format.BOLD}${Colour.GOLD}S${Format.RESET}`,
+    "SH": `${Format.BOLD}${Colour.WHITE}S${Format.RESET}`,
+    "X": `${Format.BOLD}${Colour.GOLD}SS${Format.RESET}`,
+    "XH": `${Format.BOLD}${Colour.WHITE}SS${Format.RESET}`
+}
