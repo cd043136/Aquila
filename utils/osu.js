@@ -64,6 +64,23 @@ export const getBeatmap = (beatmap_id) => {
     })
 }
 
+export const getProfile = (username) => {
+    const url = `${BASE_URL}/get_user?k=${data.osu_apikey}&u=${username}&type=string&m=0`
+    return new Promise((resolve, reject) => {
+        axios.get(url)
+            .then(response => {
+                if (response.data.length) {
+                    if ("error" in response.data) {
+                        reject("Invalid API key")
+                        return
+                    }
+                    resolve(response.data[0])
+                }
+                else reject("No user found")
+            })
+    })
+}
+
 const getMods = (modNums) => {
     // using MOD_ENUMS to convert from a number to a string
     let number = parseInt(modNums)
@@ -110,6 +127,21 @@ const calculateAcc = (score) => {
     return (userScore / totalUnscaledScore) * 100.0
 }
 
+const secondsToDhms = (seconds) => {
+    seconds = parseInt(seconds)
+    const d = Math.floor(seconds / (3600 * 24))
+    const h = Math.floor(seconds % (3600 * 24) / 3600)
+    const m = Math.floor(seconds % 3600 / 60)
+    const s = Math.floor(seconds % 60)
+
+    const dDisplay = d > 0 ? d + "d" : ""
+    const hDisplay = h > 0 ? h + "h" : ""
+    const mDisplay = m > 0 ? m + "m" : ""
+    const sDisplay = s > 0 ? s + "s" : ""
+
+    return `${dDisplay} ${hDisplay} ${mDisplay} ${sDisplay}`
+}
+
 // TODO: Complete >rs
 export const formatRecentScore = (user, score, beatmap) => {
     const rank = RANKS[score.rank]
@@ -131,6 +163,68 @@ export const formatRecentScore = (user, score, beatmap) => {
         new TextComponent(`${Colour.AQUA}${beatmap.artist} - ${beatmap.title} [${beatmap.version}]\n`).setHover("show_text", "Click to open beatmap").setClick("open_url", mapUrl),
         `${Colour.WHITE}${modstr} ${bar} ${Colour.GRAY}${acc} ${rank} ${bar} ${Format.ITALIC} `,
         new TextComponent(`${Colour.GOLD}[More Info]`).setHover("show_text", hoverMsg),
+        line
+    )
+}
+
+export const formatProfile = (profileData) => {
+    /**
+    clickable username [pp, global rank]
+    > Country Rank: US #123
+    > Accuracy: 99.99%
+    > Level: 100
+    > Playcount: 12,345
+    > Playtime: 4d 20h 15m
+    [Score data, hover]  [Hit ratio data, hover]
+     */
+    const pp = numToComma(profileData.pp_raw)
+    const rank = numToComma(profileData.pp_rank)
+    const crank = numToComma(profileData.pp_country_rank)
+    const rankedSc = numToComma(profileData.ranked_score)
+    const totalSc = numToComma(profileData.total_score)
+    const profileUrl = `https://osu.ppy.sh/users/${profileData.user_id}`
+    const totalHits = parseInt(profileData.count300) + parseInt(profileData.count100) + parseInt(profileData.count50)
+    const hitsPerPlay = (totalHits / parseInt(profileData.playcount)).toFixed(2)
+
+    const ppStr = `${Colour.AQUA}> PP: ${Format.RESET}${Colour.GRAY}${pp}pp\n`
+    const rankStr = `${Colour.AQUA}> Rank: ${Format.RESET}${Colour.GRAY}#${rank} (${profileData.country} #${crank})\n`
+    const acc = `${Colour.AQUA}> Acc: ${Format.RESET}${Colour.GRAY}${parseFloat(profileData.accuracy).toFixed(2)}%\n`
+    const level = `${Colour.AQUA}> Level: ${Format.RESET}${Colour.GRAY}${parseFloat(profileData.level).toFixed(2)}\n`
+    const playcount = `${Colour.AQUA}> PlayCount: ${Format.RESET}${Colour.GRAY}${numToComma(profileData.playcount)}\n`
+    const playtime = `${Colour.AQUA}> Playtime: ${Format.RESET}${Colour.GRAY}${secondsToDhms(profileData.total_seconds_played)}\n`
+
+    const scoreDataText = `${RANKS["XH"]}: ${profileData.count_rank_ssh}
+${RANKS["SH"]}: ${profileData.count_rank_ss}
+${RANKS["X"]}: ${profileData.count_rank_sh}
+${RANKS["S"]}: ${profileData.count_rank_s}
+${RANKS["A"]}: ${profileData.count_rank_a}
+
+${Colour.YELLOW}Ranked Score: ${rankedSc}
+Total Score: ${totalSc}`
+
+    const hitRatioText = `${Colour.AQUA}300: ${numToComma(profileData.count300)}
+${Colour.GREEN}100: ${numToComma(profileData.count100)}
+${Colour.YELLOW}50: ${numToComma(profileData.count50)}
+
+${Colour.YELLOW}Total Hits: ${numToComma(totalHits)}
+Hits per Play: ${hitsPerPlay}`
+
+    const line = ChatLib.getChatBreak(`${Colour.DARK_BLUE}-`)
+    return new Message(
+        line,
+        new TextComponent(`${CLIENT_PREFIX}${Colour.DARK_AQUA}osu!standard profile for ${Colour.GOLD}${Format.ITALIC}${profileData.username}${Colour.DARK_AQUA}:\n`)
+            .setHover("show_text", "Click to open profile")
+            .setClick("open_url", profileUrl),
+        ppStr,
+        rankStr,
+        acc,
+        level,
+        playcount,
+        playtime,
+        `${Colour.AQUA}> Other: `,
+        new TextComponent(`${Colour.GOLD}[Score Data]`).setHover("show_text", scoreDataText),
+        "   ",
+        new TextComponent(`${Colour.GOLD}[Hits Data]`).setHover("show_text", hitRatioText),
         line
     )
 }

@@ -43,7 +43,7 @@ import "./features/slayer/slayerxp"
 import "./features/slayer/alert"
 import "./features/slayer/summons"
 
-import "./features/osu/recent"
+import "./features/osu/commands"
 
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
