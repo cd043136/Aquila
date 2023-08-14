@@ -39,6 +39,7 @@ export const Blaze = Java.type("net.minecraft.entity.monster.EntityBlaze")
 export const Ghast = Java.type("net.minecraft.entity.monster.EntityGhast")
 export const Skeleton = Java.type("net.minecraft.entity.monster.EntitySkeleton")
 export const Enderman = Java.type("net.minecraft.entity.monster.EntityEnderman")
+export const Creeper = Java.type("net.minecraft.entity.monster.EntityCreeper")
 
 export const Beacon = Java.type("net.minecraft.tileentity.TileEntityBeacon")
 

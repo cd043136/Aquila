@@ -14,7 +14,7 @@ import { Colour, Format } from "./utils/constants"
 
 @Vigilant("Aquila", "Aquila", {
     getCategoryComparator: () => (a, b) => {
-        const categories = ["General", "QOL", "Dungeons", "Rift", "Kuudra", "Slayer", "osu!", "Debug"]
+        const categories = ["General", "QOL", "Combat", "Dungeons", "Rift", "Kuudra", "Slayer", "osu!", "Debug"]
         return categories.indexOf(a.name) - categories.indexOf(b.name)
     }
 })
@@ -42,6 +42,9 @@ class settings {
 
         this.addDependency("Move Overlay", "Progress Overlay")
         this.addDependency("Show Everywhere", "Progress Overlay")
+
+        this.addDependency("Minimum Angle", "Ghost Path")
+        this.addDependency("Minimum Distance", "Ghost Path")
 
         //
         this.setCategoryDescription("osu!",
@@ -545,6 +548,36 @@ ${Colour.GREEN}>osu|profile <username>${Format.RESET} - Displays osu! profile fo
         data.save()
         clientChat("Cleared!")
     }
+
+    // Combat
+    @SwitchProperty({
+        name: "Ghost Path",
+        description: "Draws a somewhat optimal path for ghost grinding",
+        category: "Combat",
+        subcategory: "Ghost"
+    })
+    ghostPath = false;
+
+    @SliderProperty({
+        name: "Minimum Angle",
+        description: "Minimum angle between ghosts in path (lower = sharper turns, if no path is found this limit will be ignored)",
+        category: "Combat",
+        subcategory: "Ghost",
+        min: 0,
+        max: 90
+    })
+    ghostPathMinAngle = 45;
+
+    @SliderProperty({
+        name: "Minimum Distance",
+        description: "Minimum distance between ghosts in path (if no path is found this limit will be ignored)",
+        category: "Combat",
+        subcategory: "Ghost",
+        min: 0,
+        max: 20
+    })
+    ghostPathMinDistance = 5;
+
 }
 
 export default new settings

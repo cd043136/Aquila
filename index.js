@@ -45,6 +45,8 @@ import "./features/slayer/summons"
 
 import "./features/osu/commands"
 
+import "./features/combat/ghost"
+
 register("command", (...args) => {
     if (args == null || !args.length) settings.openGUI()
 
