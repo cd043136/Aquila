@@ -56,8 +56,11 @@ register("chat", (s, lvl, remaining) => {
     updateSlayerData(slayer.remaining, parseInt(lvl))
 }).setCriteria("   ${s} LVL ${lvl} - Next LVL in ${remaining} XP!")
 
-register("chat", (s, lvl, remaining) => {
+register("chat", (s, lvl) => {
     slayer.remaining = Infinity
+    if (data.slayer[slayerDataName(slayer.name)].remaining !== 0) {
+        updateSlayerData(0, 9)
+    }
     updateSlayerData(undefined, 9)
 }).setCriteria("   ${s} LVL ${lvl} - LVL MAXED OUT!")
 
@@ -90,9 +93,6 @@ const reset = () => {
 
 const updateSlayerData = (remaining = undefined, lvl = undefined) => {
     const name = slayerDataName(slayer.name)
-    // get slayer name
-
-
     if (remaining && data.slayer[name].remaining !== remaining) {
         data.slayer[name].remaining = remaining
         data.save()
