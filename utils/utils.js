@@ -113,3 +113,11 @@ register("chat", (e) => {
 
 export const stripRank = (rankedPlayer) => rankedPlayer.replace(/\[[\w+\+-]+] /, "").trim()
 
+export const getSlotCenter = (slot) => {
+    let x = slot % 9
+    let y = Math.floor(slot / 9)
+    let renderX = Renderer.screen.getWidth() / 2 + ((x - 4) * 18)
+    let renderY = (Renderer.screen.getHeight() + 10) / 2 + ((y - Player.getContainer().getSize() / 18) * 18)
+    return [renderX, renderY]
+}
+

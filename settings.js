@@ -38,8 +38,6 @@ class settings {
         this.addDependency("Hide Boss Messages", "Spam Hider")
         this.addDependency("Hide Mort Messages", "Spam Hider")
 
-        this.addDependency("Hide From ActionBar", "Dominus Timer")
-
         this.addDependency("Move Overlay", "Progress Overlay")
         this.addDependency("Show Everywhere", "Progress Overlay")
 
@@ -60,7 +58,6 @@ Beatmap data is cached. If it starts taking up too much space, you can clear the
     hitphaseGui = new Gui()
     spamChatGui = new Gui()
     slayerOvGui = new Gui()
-    dominusGui = new Gui()
     summonsGui = new Gui()
 
     // DEBUG
@@ -157,6 +154,14 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
     })
     starMobsDistance = 30;
 
+    @SwitchProperty({
+        name: "Croesus Overlay",
+        description: "Highlights unopened chests in red",
+        category: "Dungeons",
+        subcategory: "Croesus"
+    })
+    croesusOverlay = false;
+
     // KUUDRA
     @SwitchProperty({
         name: "Token Shop Helper",
@@ -191,34 +196,6 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
     compactKuudraStats = false;
 
     // QOL
-    @SwitchProperty({
-        name: "Dominus Timer",
-        description: `
-Displays how long until you lose a dominus stack. Might be inaccurate upon reloading the mod.
-${Colour.RED}Requires ${Format.BOLD}Book of Stats${Format.RESET}${Colour.RED} on damage weapon!`,
-        category: "QOL",
-        subcategory: "Crimson Armor"
-    })
-    dominusTracker = false;
-
-    @SwitchProperty({
-        name: "Hide From ActionBar",
-        description: "Hides dominus text from actionbar (the usual place where it is displayed, beside the hp)",
-        category: "QOL",
-        subcategory: "Crimson Armor"
-    })
-    hideFromActionBar = false;
-
-    @ButtonProperty({
-        name: "Move Dominus Text",
-        description: "Move dominus timer text position",
-        category: "QOL",
-        subcategory: "Crimson Armor"
-    })
-    moveDominusText() {
-        this.dominusGui.open()
-    };
-
     @SwitchProperty({
         name: "Spam Hider",
         description: "Hides spammy messages like Implosion dmg etc",

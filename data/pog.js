@@ -27,10 +27,6 @@ export let data = new PogObject("Aquila", {
         x: 20,
         y: 50
     },
-    dominus_timer_location: {
-        x: 366,
-        y: 423
-    },
     summons_hp_location: {
         x: 636,
         y: 86

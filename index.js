@@ -20,6 +20,7 @@ import "./features/update/updatecheck"
 import "./features/debug/sound"
 
 import "./features/dungeons/starmobs"
+import "./features/dungeons/croesus"
 
 import "./features/general/logo"
 import "./features/general/spam"
@@ -30,7 +31,6 @@ import "./features/kuudra/kuudrapf"
 import "./features/qol/coords"
 import "./features/qol/deathanim"
 import "./features/qol/entityrenders"
-import "./features/qol/dominus"
 
 import "./features/rift/berberis"
 import "./features/rift/odonata"
