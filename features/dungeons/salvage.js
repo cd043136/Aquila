@@ -10,8 +10,8 @@ const CONTAINER_NAMES = [
 ]
 
 registerWhen(register("postGuiRender", () => {
-    const inv = Player.getContainer()
-    const itemSlots = inv.getItems()
+    let inv = Player.getContainer()
+    let itemSlots = inv.getItems()
         .map((item, index) => SALVAGEABLE.some(name => item?.getNBT()?.getCompoundTag("tag")?.getCompoundTag("ExtraAttributes")?.getString("id")?.startsWith(name)) ? index : null)
         .filter(i => i != null)
     //ChatLib.chat(`Found ${itemSlots.length} items to salvage`)
