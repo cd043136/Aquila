@@ -38,6 +38,11 @@ Alternatively, open the zip of the updated release and drag the `Aquila` folder 
 
 ![](https://i.imgur.com/j3BBI1N.png)
 
+- Highlight unopened Croesus chests & salvageable items
+
+![](https://i.imgur.com/kp0oqLX.png)
+![](https://i.imgur.com/IWtftpG.png)
+
 ### Rift
 
 - Berberis bush highlight:
@@ -90,5 +95,9 @@ Alternatively, open the zip of the updated release and drag the `Aquila` folder 
 - Funny logo
 
 ![](https://i.imgur.com/P0th4W0.png)
+
+- Scuffed ghost pathing
+
+![](https://i.imgur.com/Bcy5c6G.png)
 
 ### & more to come!

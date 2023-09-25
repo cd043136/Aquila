@@ -384,14 +384,14 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
     @SwitchProperty({
         name: "Warp Shortcut",
         description: `Enables short commands to warp to slayer locations:\n
-    ${Colour.GREEN}/ws:${Format.RESET} warp sepulture\n
-    ${Colour.GREEN}/wc:${Format.RESET} warp crypt\n
-    ${Colour.GREEN}/wa:${Format.RESET} warp arachne\n
-    ${Colour.GREEN}/wsp:${Format.RESET} warp spider\n
-    ${Colour.GREEN}/wh:${Format.RESET} warp howl\n
-    ${Colour.GREEN}/wr:${Format.RESET} warp castle (ruins)\n
-    ${Colour.GREEN}/ww:${Format.RESET} warp wiz\n
-    ${Colour.GREEN}/wsm:${Format.RESET} warp smold\n
+    ${Colour.GREEN}//ws:${Format.RESET} warp sepulture\n
+    ${Colour.GREEN}//wc:${Format.RESET} warp crypt\n
+    ${Colour.GREEN}//wa:${Format.RESET} warp arachne\n
+    ${Colour.GREEN}//wsp:${Format.RESET} warp spider\n
+    ${Colour.GREEN}//wh:${Format.RESET} warp howl\n
+    ${Colour.GREEN}//wr:${Format.RESET} warp castle (ruins)\n
+    ${Colour.GREEN}//ww:${Format.RESET} warp wiz\n
+    ${Colour.GREEN}//wsm:${Format.RESET} warp smold\n
 ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override any mod commands of the same name.`,
         category: "Slayer",
         subcategory: "QOL"

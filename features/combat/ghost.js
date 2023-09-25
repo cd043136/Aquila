@@ -123,8 +123,3 @@ const getAngle = (line1, line2) => {
     let angle = Math.abs(angle1 - angle2) * 180 / Math.PI
     return angle > 180 ? 360 - angle : angle
 }
-
-register("command", () => {
-    if (!ghostQueue.length) return ChatLib.chat("&cNo ghosts found")
-    ChatLib.chat(`&a${ghostQueue.length} ghosts found`)
-}).setName("ghosts")
