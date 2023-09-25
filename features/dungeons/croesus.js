@@ -7,7 +7,7 @@ const NAMES = [
     "The Catacombs"
 ]
 
-registerWhen(register("postGuiRender", () => {
+registerWhen(register("guiRender", () => {
     const cont = Player.getContainer()
 
     let chestSlots = cont.getItems()
@@ -16,7 +16,7 @@ registerWhen(register("postGuiRender", () => {
 
     if (!chestSlots.length) return
 
-    chestSlots.forEach(slot => {
+    for (let slot of chestSlots) {
         let item = cont.getStackInSlot(slot)
         let opened = getMatchFromLines(/Chests expire in (.+)\!/, item.getLore().map(i => i.removeFormatting()))
 
@@ -30,6 +30,6 @@ registerWhen(register("postGuiRender", () => {
                 settings.croesusOverlayColor.getAlpha()
             ), 0, 0, 16, 16)
         }
-    })
+    }
 
 }), () => settings.croesusOverlay && Player.getContainer() && Player.getContainer().getName() === "Croesus")
