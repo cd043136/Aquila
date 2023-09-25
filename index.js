@@ -21,6 +21,7 @@ import "./features/debug/sound"
 
 import "./features/dungeons/starmobs"
 import "./features/dungeons/croesus"
+import "./features/dungeons/salvage"
 
 import "./features/general/logo"
 import "./features/general/spam"

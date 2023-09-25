@@ -44,6 +44,13 @@ class settings {
         this.addDependency("Minimum Angle", "Ghost Path")
         this.addDependency("Minimum Distance", "Ghost Path")
 
+        this.addDependency("Star Mobs Colour", "Box Star Mobs")
+        this.addDependency("Distance Filter", "Box Star Mobs")
+
+        this.addDependency("Croesus Overlay Colour", "Croesus Overlay")
+
+        this.addDependency("Salvageable Items Colour", "Salvageable Items")
+
         //
         this.setCategoryDescription("osu!",
             `Runs generic osu! commands.
@@ -161,6 +168,28 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
         subcategory: "Croesus"
     })
     croesusOverlay = false;
+
+    @ColorProperty({
+        name: "Croesus Overlay Colour",
+        category: "Dungeons",
+        subcategory: "Croesus"
+    })
+    croesusOverlayColor = new Color(1, 0, 0, 1);
+
+    @SwitchProperty({
+        name: "Salvageable Items",
+        description: "Highlights salvageable items",
+        category: "Dungeons",
+        subcategory: "Salvage"
+    })
+    salvageableItems = false;
+
+    @ColorProperty({
+        name: "Salvageable Items Colour",
+        category: "Dungeons",
+        subcategory: "Salvage"
+    })
+    salvageableItemsColor = new Color(1, 0, 0, 1);
 
     // KUUDRA
     @SwitchProperty({

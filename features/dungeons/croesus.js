@@ -10,7 +10,10 @@ const NAMES = [
 registerWhen(register("postGuiRender", () => {
     const cont = Player.getContainer()
 
-    let chestSlots = cont.getItems().map((item, index) => NAMES.some(name => item?.getName()?.removeFormatting() === name) ? index : null).filter(i => i != null)
+    let chestSlots = cont.getItems()
+        .map((item, index) => NAMES.some(name => item?.getName()?.removeFormatting() === name) ? index : null)
+        .filter(i => i != null)
+
     if (!chestSlots.length) return
 
     chestSlots.forEach(slot => {
@@ -20,7 +23,12 @@ registerWhen(register("postGuiRender", () => {
         if (opened) {
             let [x, y] = getSlotCenter(slot)
             Renderer.translate(x - 8, y - 8, 50)
-            Renderer.drawRect(Renderer.color(255, 0, 0, 255), 0, 0, 16, 16)
+            Renderer.drawRect(Renderer.color(
+                settings.croesusOverlayColor.getRed(),
+                settings.croesusOverlayColor.getGreen(),
+                settings.croesusOverlayColor.getBlue(),
+                settings.croesusOverlayColor.getAlpha()
+            ), 0, 0, 16, 16)
         }
     })
 

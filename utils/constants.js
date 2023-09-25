@@ -164,3 +164,20 @@ export const RANKS = {
     "X": `${Format.BOLD}${Colour.GOLD}SS${Format.RESET}`,
     "XH": `${Format.BOLD}${Colour.WHITE}SS${Format.RESET}`
 }
+
+// salvageable items
+export const SALVAGEABLE = [
+    "BOUNCY_",
+    "HEAVY_",
+    "NECROMANCER_LORD_",
+    "SKELETON_LORD_",
+    "SKELETON_GRUNT_",
+    "SKELETON_MASTER_",
+    "SKELETON_SOLDIER_",
+    "SKELETOR_",
+    "SUPER_HEAVY_",
+    "ZOMBIE_COMMANDER_",
+    "ZOMBIE_KNIGHT_",
+    "ZOMBIE_LORD_",
+    "ZOMBIE_SOLDIER_"
+]
