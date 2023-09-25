@@ -1,8 +1,14 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "changelog": [
-        "Fixed some eman overlay bugs",
-        "Added boss spawn/kill alert",
-        "Added better default overlay locations"
+        "Made voidgloom overlay work with twilight arrow poisoned boss",
+        "Add spammy text hider",
+        "Add basic slayer overlay",
+        "Add summons HP overlay",
+        "Add ghost grinding pathing",
+        "Add osu commands: >rs and >profile",
+        "Add salvageable items highlight",
+        "Add croesus unopened chests higlight",
+        "Removed boss slain alert"
     ]
 }
