@@ -1,3 +1,4 @@
+import { data } from "./data/pog"
 import {
     Color,
     @ColorProperty,
@@ -13,7 +14,7 @@ import { Colour, Format } from "./utils/constants"
 
 @Vigilant("Aquila", "Aquila", {
     getCategoryComparator: () => (a, b) => {
-        const categories = ["General", "QOL", "Dungeons", "Rift", "Kuudra", "Slayer", "Debug"]
+        const categories = ["General", "QOL", "Combat", "Dungeons", "Rift", "Kuudra", "Slayer", "osu!", "Debug"]
         return categories.indexOf(a.name) - categories.indexOf(b.name)
     }
 })
@@ -31,11 +32,40 @@ class settings {
         this.addDependency("Include Players", "Aggressive Culling")
         this.addDependency("Cull Tile Entities", "Aggressive Culling")
         this.addDependency("Cull Particles", "Aggressive Culling")
+
+        this.addDependency("Hide Type", "Spam Hider")
+        this.addDependency("Hide Death Messages", "Spam Hider")
+        this.addDependency("Hide Boss Messages", "Spam Hider")
+        this.addDependency("Hide Mort Messages", "Spam Hider")
+
+        this.addDependency("Move Overlay", "Progress Overlay")
+        this.addDependency("Show Everywhere", "Progress Overlay")
+
+        this.addDependency("Minimum Angle", "Ghost Path")
+        this.addDependency("Minimum Distance", "Ghost Path")
+
+        this.addDependency("Star Mobs Colour", "Box Star Mobs")
+        this.addDependency("Distance Filter", "Box Star Mobs")
+
+        this.addDependency("Croesus Overlay Colour", "Croesus Overlay")
+
+        this.addDependency("Salvageable Items Colour", "Salvageable Items")
+
+        //
+        this.setCategoryDescription("osu!",
+            `Runs generic osu! commands.
+
+First, set your osu! api key with ${Colour.GREEN}/osuapikey <key>${Format.RESET}
+
+Beatmap data is cached. If it starts taking up too much space, you can clear them with ${Colour.RED}/clearosucache${Format.RESET} or with the button below.`)
     }
 
     logoMoveGui = new Gui()
     tokenGui = new Gui()
     hitphaseGui = new Gui()
+    spamChatGui = new Gui()
+    slayerOvGui = new Gui()
+    summonsGui = new Gui()
 
     // DEBUG
     @SwitchProperty({
@@ -51,7 +81,7 @@ class settings {
         description: "Filter out sounds that are too far away",
         category: "Debug",
         subcategory: "Sounds",
-        min: 1,
+        min: 0,
         max: 20
     })
     soundDistance = 10;
@@ -121,6 +151,46 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
     })
     starMobsColor = new Color(1, 0, 0, 1);
 
+    @SliderProperty({
+        name: "Distance Filter",
+        description: "Only draw boxes around star mobs within this distance",
+        category: "Dungeons",
+        subcategory: "Star Mobs",
+        min: 5,
+        max: 60
+    })
+    starMobsDistance = 30;
+
+    @SwitchProperty({
+        name: "Croesus Overlay",
+        description: "Highlights unopened chests in red",
+        category: "Dungeons",
+        subcategory: "Croesus"
+    })
+    croesusOverlay = false;
+
+    @ColorProperty({
+        name: "Croesus Overlay Colour",
+        category: "Dungeons",
+        subcategory: "Croesus"
+    })
+    croesusOverlayColor = new Color(1, 0, 0, 1);
+
+    @SwitchProperty({
+        name: "Salvageable Items",
+        description: "Highlights salvageable items",
+        category: "Dungeons",
+        subcategory: "Salvage"
+    })
+    salvageableItems = false;
+
+    @ColorProperty({
+        name: "Salvageable Items Colour",
+        category: "Dungeons",
+        subcategory: "Salvage"
+    })
+    salvageableItemsColor = new Color(1, 0, 0, 1);
+
     // KUUDRA
     @SwitchProperty({
         name: "Token Shop Helper",
@@ -155,6 +225,56 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
     compactKuudraStats = false;
 
     // QOL
+    @SwitchProperty({
+        name: "Spam Hider",
+        description: "Hides spammy messages like Implosion dmg etc",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    spamHider = false;
+
+    @SelectorProperty({
+        name: "Hide Type",
+        description: "How spammy messages should be hidden",
+        category: "QOL",
+        subcategory: "Spam",
+        options: ["Hide completely", "Separate chat"]
+    })
+    hideType = 0;
+
+    @SwitchProperty({
+        name: "Hide Death Messages",
+        description: "Hides player death messages",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    hideDeathMessages = false;
+
+    @SwitchProperty({
+        name: "Hide Boss Messages",
+        description: "Hides dungeon boss messages",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    hideBossMessages = false;
+
+    @SwitchProperty({
+        name: "Hide Mort Messages",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    hideMortMessages = false;
+
+    @ButtonProperty({
+        name: "Move Spam Text",
+        description: "Move where spam text is displayed if 'Separate chat' option is selected",
+        category: "QOL",
+        subcategory: "Spam"
+    })
+    moveSpamText() {
+        this.spamChatGui.open()
+    };
+
     @SwitchProperty({
         name: "Coordinates",
         description: "Display coordinates on screen",
@@ -264,17 +384,63 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
     @SwitchProperty({
         name: "Warp Shortcut",
         description: `Enables short commands to warp to slayer locations:\n
-    ${Colour.GREEN}/ws:${Format.RESET} warp sepulture\n
-    ${Colour.GREEN}/wc:${Format.RESET} warp crypt\n
-    ${Colour.GREEN}/wa:${Format.RESET} warp arachne\n
-    ${Colour.GREEN}/wh:${Format.RESET} warp howl\n
-    ${Colour.GREEN}/ww:${Format.RESET} warp wiz\n
-    ${Colour.GREEN}/wsm:${Format.RESET} warp smold\n
+    ${Colour.GREEN}//ws:${Format.RESET} warp sepulture\n
+    ${Colour.GREEN}//wc:${Format.RESET} warp crypt\n
+    ${Colour.GREEN}//wa:${Format.RESET} warp arachne\n
+    ${Colour.GREEN}//wsp:${Format.RESET} warp spider\n
+    ${Colour.GREEN}//wh:${Format.RESET} warp howl\n
+    ${Colour.GREEN}//wr:${Format.RESET} warp castle (ruins)\n
+    ${Colour.GREEN}//ww:${Format.RESET} warp wiz\n
+    ${Colour.GREEN}//wsm:${Format.RESET} warp smold\n
 ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override any mod commands of the same name.`,
         category: "Slayer",
         subcategory: "QOL"
     })
     warpShortcut = false;
+
+    @SwitchProperty({
+        name: "Miniboss Ping",
+        description: "Plays a sound when a miniboss spawns, same feature as soopy's but less reliable XD",
+        category: "Slayer",
+        subcategory: "QOL"
+    })
+    minibossPing = false;
+
+    @SwitchProperty({
+        name: "Progress Overlay",
+        description: `
+Displays slayer progress on screen (remaining bosses, xp, etc). Requires you to complete one slayer quest first.
+${Colour.RED}Inaccurate during Aatrox bonus slayer XP perk!${Format.RESET}`,
+        category: "Slayer",
+        subcategory: "Overlay"
+    })
+    progressOverlay = false;
+
+    @SwitchProperty({
+        name: "Show Everywhere",
+        description: "Shows slayer progress overlay everywhere, not just in slayer locations",
+        category: "Slayer",
+        subcategory: "Overlay"
+    })
+    showEverywhere = false;
+
+    @SwitchProperty({
+        name: "Force Aatrox",
+        description: "Force Aatrox +25% slayer xp perk to fix 'boss remaining' count",
+        category: "Slayer",
+        subcategory: "Overlay"
+    })
+    forceAatrox = false;
+
+    @ButtonProperty({
+        name: "Move Overlay",
+        description: "Move slayer progress overlay position",
+        category: "Slayer",
+        subcategory: "Overlay"
+    })
+    moveOverlay() {
+        this.slayerOvGui.open()
+    }
 
     @SwitchProperty({
         name: "Point to Boss",
@@ -310,22 +476,6 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
     fillType = 0;
 
     @SwitchProperty({
-        name: "Boss Alert",
-        description: "Alerts you when your boss spawned",
-        category: "Slayer",
-        subcategory: "QOL"
-    })
-    bossAlert = false;
-
-    @SwitchProperty({
-        name: "Miniboss Ping",
-        description: "Plays a sound when a miniboss spawns, same feature as soopy's but less reliable XD",
-        category: "Slayer",
-        subcategory: "QOL"
-    })
-    minibossPing = false;
-
-    @SwitchProperty({
         name: "Phase Display",
         description: "Displays text showing voidgloom HP, hits remaining, beacon, and laser timers",
         category: "Slayer",
@@ -350,6 +500,90 @@ ${Colour.RED}${Format.BOLD}WARNING:${Format.RESET} This will *likely* override a
         subcategory: "Voidgloom"
     })
     beaconHelper = false;
+
+    @SwitchProperty({
+        name: "Summons HP",
+        description: "Display summons HP",
+        category: "Slayer",
+        subcategory: "Voidgloom"
+    })
+    summonsHP = false;
+
+    @ButtonProperty({
+        name: "Move Summons Text",
+        description: "Move summons HP text position",
+        category: "Slayer",
+        subcategory: "Voidgloom"
+    })
+    moveSummonsText() {
+        this.summonsGui.open()
+    };
+
+    @SwitchProperty({
+        name: "Boss Spawn Alert",
+        description: "Plays a sound and show big text on screen when the boss is spawning",
+        category: "Slayer",
+        subcategory: "Misc"
+    })
+    bossSpawnAlert = false;
+
+    // osu
+    @SwitchProperty({
+        name: "Enable osu! Commands",
+        description: `Available commands:
+${Colour.GREEN}>rs|r <username>${Format.RESET} - Displays recent score for <username>
+${Colour.GREEN}>osu|profile <username>${Format.RESET} - Displays osu! profile for <username>`,
+        category: "osu!"
+    })
+    enableOsuCommands = false;
+
+    @SwitchProperty({
+        name: "Hide command messages",
+        description: "Hides your commands (>rs, >osu, etc) from chat",
+        category: "osu!"
+    })
+    hideCommandMessages = true;
+
+    @ButtonProperty({
+        name: "Clear Beatmap Cache",
+        description: "Clears cached beatmaps data",
+        category: "osu!"
+    })
+    clearBeatmapCache() {
+        data.osu_cache.beatmaps = {}
+        data.save()
+        clientChat("Cleared!")
+    }
+
+    // Combat
+    @SwitchProperty({
+        name: "Ghost Path",
+        description: "Draws a somewhat optimal path for ghost grinding",
+        category: "Combat",
+        subcategory: "Ghost"
+    })
+    ghostPath = false;
+
+    @SliderProperty({
+        name: "Minimum Angle",
+        description: "Minimum angle between ghosts in path (lower = sharper turns, if no path is found this limit will be ignored)",
+        category: "Combat",
+        subcategory: "Ghost",
+        min: 0,
+        max: 90
+    })
+    ghostPathMinAngle = 45;
+
+    @SliderProperty({
+        name: "Minimum Distance",
+        description: "Minimum distance between ghosts in path (if no path is found this limit will be ignored)",
+        category: "Combat",
+        subcategory: "Ghost",
+        min: 0,
+        max: 20
+    })
+    ghostPathMinDistance = 5;
+
 }
 
 export default new settings

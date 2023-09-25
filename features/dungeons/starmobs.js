@@ -11,13 +11,13 @@ registerWhen(register("tick", () => {
     starMobs = World.getAllEntitiesOfType(ArmorStand).filter(entity =>
         !entity.getName().includes(",") &&
         !entity.getName().includes("Livid") &&
-        ESP_NAMES.some(a => entity.getName().includes(a))
+        ESP_NAMES.some(a => entity.getName().includes(a)) &&
+        Player.asPlayerMP().distanceTo(entity) <= settings.starMobsDistance
     )
 }), () => data.location == "Catacombs" && settings.boxStarMobs)
 
 registerWhen(register("renderWorld", () => {
     starMobs.forEach(entity => {
-        // TODO: filter distance
         RenderLib.drawEspBox(
             entity.getRenderX(),
             entity.getRenderY() - 2,

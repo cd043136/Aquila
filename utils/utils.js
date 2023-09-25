@@ -6,8 +6,8 @@ export const clientChat = (msg) => {
     ChatLib.chat(CLIENT_PREFIX + msg)
 }
 
-export const clientWarning = (msg, asAlert = false, subtitle = "") => {
-    if (asAlert) Client.Companion.showTitle(CLIENT_PREFIX + "§c§l" + msg, subtitle, 10, 100, 10)
+export const clientWarning = (msg, asAlert = false, subtitle = "", duration = 30) => {
+    if (asAlert) Client.showTitle(msg, subtitle, 1, duration, 1)
     else ChatLib.chat(CLIENT_PREFIX + "§c§l" + msg)
 }
 
@@ -34,6 +34,33 @@ export const getPlayerData = (uuid) => {
             key: data.apikey
         }
     })
+}
+
+const tempRomanNums = {
+    "I": 1,
+    "II": 2,
+    "III": 3,
+    "IV": 4,
+    "V": 5
+}
+export const romanToNum = (romInput) => {
+    // TODO: do this properly. for now, just use a map
+    return tempRomanNums[romInput]
+}
+
+export const numToComma = (num) => {
+    // convert 1000000 to 1,000,000
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
+export const getArmorWearing = (entity = undefined) => {
+    const c = entity ? entity : Player.asPlayerMP()
+
+    const a = []
+    for (let i = 1; i < 5; i++) {
+        a.push(c.getItemInSlot(i))
+    }
+    return a
 }
 
 //
@@ -85,4 +112,12 @@ register("chat", (e) => {
 })
 
 export const stripRank = (rankedPlayer) => rankedPlayer.replace(/\[[\w+\+-]+] /, "").trim()
+
+export const getSlotCenter = (slot) => {
+    let x = slot % 9
+    let y = Math.floor(slot / 9)
+    let renderX = Renderer.screen.getWidth() / 2 + ((x - 4) * 18)
+    let renderY = (Renderer.screen.getHeight() + 10) / 2 + ((y - Player.getContainer().getSize() / 18) * 18)
+    return [renderX, renderY]
+}
 

@@ -1,7 +1,7 @@
 import settings from "../../settings"
 import RenderLib from "../../../RenderLib"
 import { data } from "../../data/pog"
-import { slayerFightCheck } from "../../utils/slayer"
+import { getSlayer, slayerFightCheck } from "../../utils/slayer"
 import { addForgeTrigger, registerWhen } from "../../utils/triggers"
 import { ArmorStand, EnderTeleportEvent, Enderman, EventPriority } from "../../utils/constants"
 import { drawLine, guiMoveHelper } from "../../utils/render"
@@ -50,7 +50,13 @@ registerWhen(register("tick", () => {
     else {
         // boss hp stuff
         if (bossStand.getName().includes("❤")) {
-            hp = bossStand.getName().split(" ")[3]
+            // ☠ Voidgloom Seraph ᛤ 276k❤
+            if (bossStand.getName().includes("ᛤ")) {
+                // get the last 2 words
+                // use .join and .split
+                hp = bossStand.getName().split(" ").slice(-2).join(" ")
+            }
+            else hp = bossStand.getName().split(" ")[bossStand.getName().split(" ").length - 1]
         } else hp = ""
     }
 
@@ -145,7 +151,7 @@ registerWhen(register("tick", () => {
         }
     }
 
-}), () => slayerFightCheck() && (settings.phaseDisplay || settings.pointToBoss || settings.beaconHelper))
+}), () => slayerFightCheck() && getSlayer() === "Voidgloom Seraph" && (settings.phaseDisplay || settings.pointToBoss || settings.beaconHelper))
 
 registerWhen(register("renderOverlay", () => {
     if (bossStand === undefined) return
@@ -159,8 +165,10 @@ registerWhen(register("renderOverlay", () => {
     // hit phase thing
     if (bossStand.getName().includes("Hits")) {
         // ☠ Voidgloom Seraph 30 Hits
+        // ☠ Voidgloom Seraph ᛤ 12 Hits
         const cleanName = ChatLib.removeFormatting(bossStand.getName())
-        const hits = parseInt(cleanName.split(" ")[3])
+        // get the 2nd last word
+        const hits = parseInt(cleanName.split(" ")[cleanName.split(" ").length - 2])
         const c = hits > 75 ? Colour.GREEN : hits > 50 ? Colour.YELLOW : hits > 25 ? Colour.GOLD : Colour.RED
         overlayStr += `${Format.BOLD}${c}${hits}${Format.RESET}${Colour.GRAY} Hits${Format.RESET}\n`
     }
@@ -180,8 +188,10 @@ registerWhen(register("renderOverlay", () => {
     Renderer.scale(2, 2)
     Renderer.drawString(overlayStr, data.hit_phase_location.x / 2, data.hit_phase_location.y / 2, true)
     Renderer.scale(1, 1)
-}), () => slayerFightCheck() && settings.phaseDisplay)
+}), () => slayerFightCheck() && getSlayer() === "Voidgloom Seraph" && settings.phaseDisplay)
 
+// TODO: make point to boss a separate file
+// maybe a folder for each slayer boss?
 registerWhen(register("renderWorld", () => {
     if (settings.beaconHelper && beaconPoints.length > 1) {
         // render path
@@ -228,7 +238,7 @@ registerWhen(register("renderWorld", () => {
     drawLine(rightCoords.x, y, rightCoords.z, entityCoords.x, y, entityCoords.z, 1, 0, 0, 1, 3)
 
     // CHANGE checkfunc if other stuff is added
-}), () => slayerFightCheck() && bossStand !== undefined && (settings.pointToBoss || settings.beaconHelper))
+}), () => slayerFightCheck() && getSlayer() === "Voidgloom Seraph" && bossStand !== undefined && (settings.pointToBoss || settings.beaconHelper))
 
 const normalisedEntityCoords = (entityX, entityZ) => {
     /*return {
@@ -287,7 +297,7 @@ register("chat", () => {
         beacontime = 0
         beaconBlock = undefined
     }, 500)
-}).setCriteria(/(  SLAYER QUEST (FAILED|STARTED)!)|(Your Slayer Quest has been cancelled!)/)
+}).setCriteria(/^(  SLAYER QUEST (FAILED|STARTED)!)|(Your Slayer Quest has been cancelled!)$/)
 
 // suppress TP
 

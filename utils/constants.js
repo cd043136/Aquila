@@ -1,6 +1,33 @@
 // Texture
 export const ODONATA_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWZkODA2ZGVmZGZkZjU5YjFmMjYwOWM4ZWUzNjQ2NjZkZTY2MTI3YTYyMzQxNWI1NDMwYzkzNThjNjAxZWY3YyJ9fX0="
 
+// Roman numerals
+export const RomanNumerals = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100
+}
+
+// Slayer stuff
+export const SlayerXP = {
+    1: 5,
+    2: 25,
+    3: 100,
+    4: 500,
+    5: 1500
+}
+
+export const slayerNames = [
+    "Voidgloom Seraph",
+    "Revenant Horror",
+    "Sven Packmaster",
+    "Tarantula Broodfather",
+    "Riftstalker Bloodfiend",
+    "Inferno Demonlord"
+]
+
 // Prefix
 export const CLIENT_PREFIX = "§1[§9AQ§1]§r "
 
@@ -12,6 +39,7 @@ export const Blaze = Java.type("net.minecraft.entity.monster.EntityBlaze")
 export const Ghast = Java.type("net.minecraft.entity.monster.EntityGhast")
 export const Skeleton = Java.type("net.minecraft.entity.monster.EntitySkeleton")
 export const Enderman = Java.type("net.minecraft.entity.monster.EntityEnderman")
+export const Creeper = Java.type("net.minecraft.entity.monster.EntityCreeper")
 
 export const Beacon = Java.type("net.minecraft.tileentity.TileEntityBeacon")
 
@@ -90,3 +118,66 @@ export const Format = {
     RESET: "§r",
     OBFUSCATED: "§k"
 }
+
+export const spamRegex = [
+    /There are blocks in the way!/,
+    /Your (.+) hit (.+) enem(y|(ies)) for (.+) damage\./,
+    /You are playing on profile: (.+)/,
+    /Profile ID: (.+)/,
+    /Not enough mana! (Costs (.+) mana)/,
+    /\+(.+) Kill Combo (.+)/,
+    /Sending to server (.+)\.\.\./,
+    /You earned (.+) from playing SkyBlock!/,
+    /Your Kill Combo has expired! You reached a (.+) Kill Combo!/,
+    /Warping\.\.\./,
+    /You summoned your (.+)!/,
+    /Unknown command\. Type "\/help" for help\./,
+    /This ability is on cooldown for (.+)/,
+    /Your active Potion Effects have been paused and stored\. They will be restored when you leave Dungeons\! You are not allowed to use existing Potion Effects while in Dungeons\./,
+    /Your previous (.+) was removed\!/,
+    /(.+) is ready to use\! Press (.+) to activate it\!/,
+    /(.+) is now ready\!/,
+    /(.+) selected the (.+) Dungeon Class\!/,
+    /Dungeon starts in (.+) seconds\./,
+    /Creeper Veil (A|De\-a)ctivated\!/
+]
+
+export const mortMsgRegex = [
+    /\[NPC\] Mort\: Here\, I found this map when I first entered the dungeon\./,
+    /\[NPC\] Mort\: You should find it useful if you get lost\./,
+    /\[NPC\] Mort\: Good luck\./
+]
+
+// maybe add more specific regexes for each boss
+export const bossMsgRegex = [/[BOSS] (.+)\: (.+)/]
+export const deathMsgRegex = [/ ☠ (.+) was killed by (.+)\./]
+
+// osu stuff
+export const RANKS = {
+    "F": `${Format.BOLD}${Colour.GRAY}Failed${Format.RESET}`,
+    "D": `${Format.BOLD}${Colour.RED}D${Format.RESET}`,
+    "C": `${Format.BOLD}${Colour.YELLOW}C${Format.RESET}`,
+    "B": `${Format.BOLD}${Colour.BLUE}B${Format.RESET}`,
+    "A": `${Format.BOLD}${Colour.GREEN}A${Format.RESET}`,
+    "S": `${Format.BOLD}${Colour.GOLD}S${Format.RESET}`,
+    "SH": `${Format.BOLD}${Colour.WHITE}S${Format.RESET}`,
+    "X": `${Format.BOLD}${Colour.GOLD}SS${Format.RESET}`,
+    "XH": `${Format.BOLD}${Colour.WHITE}SS${Format.RESET}`
+}
+
+// salvageable items
+export const SALVAGEABLE = [
+    "BOUNCY_",
+    "HEAVY_",
+    "NECROMANCER_LORD_",
+    "SKELETON_LORD_",
+    "SKELETON_GRUNT_",
+    "SKELETON_MASTER_",
+    "SKELETON_SOLDIER_",
+    "SKELETOR_",
+    "SUPER_HEAVY_",
+    "ZOMBIE_COMMANDER_",
+    "ZOMBIE_KNIGHT_",
+    "ZOMBIE_LORD_",
+    "ZOMBIE_SOLDIER_"
+]

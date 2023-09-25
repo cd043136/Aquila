@@ -6,16 +6,35 @@ import { slayerFightCheck, slayerLocationCheck } from "../../utils/slayer"
 
 let minis = []
 
+const inMinisArray = (entity) => {
+    const copy = [...minis]
+    for (let i = 0; i < copy.length; i++) {
+        if (copy[i].entity.getUUID() == entity.getUUID()) return true
+    }
+    return false
+}
+
+const getMinisIndex = (entity) => {
+    const copy = [...minis]
+    for (let i = 0; i < copy.length; i++) {
+        if (copy[i].entity.getUUID() == entity.getUUID()) return i
+    }
+    return -1
+}
+
 registerWhen(register("tick", () => {
-    minis = []
-    World.getAllEntitiesOfType(ArmorStand.class).forEach(a => {
-        // include short name?
+    if (minis.length > 100) minis = []
+    // minis = []
+
+    const stands = World.getAllEntitiesOfType(ArmorStand.class)
+    for (let a of stands) {
+        if (inMinisArray(a)) continue
+        // voidgloom
         if (a.getName().includes("Voidling Radical") || a.getName().includes("Voidling Devotee")) minis.push({
+            entity: a,
             height: 3,
             width: 1,
-            x: a.getRenderX(),
-            y: a.getRenderY() - 3,
-            z: a.getRenderZ(),
+            yoffset: -3,
             // colour
             r: 255 / 255,
             g: 255 / 255,
@@ -23,16 +42,63 @@ registerWhen(register("tick", () => {
         })
 
         else if (a.getName().includes("Voidcrazed Maniac")) minis.push({
+            entity: a,
             height: 3,
             width: 1,
-            x: a.getRenderX(),
-            y: a.getRenderY() - 3,
-            z: a.getRenderZ(),
-            // colour
+            yoffset: -3,
             r: 1,
             g: 77 / 255,
             b: 77 / 255
         })
+
+        // spider
+        else if (a.getName().includes("Tarantula Beast")) minis.push({
+            entity: a,
+            height: 0.8,
+            width: 1.75,
+            yoffset: -1,
+            // colour
+            r: 1,
+            g: 1,
+            b: 1
+        })
+
+        else if (a.getName().includes("Mutant Tarantula")) minis.push({
+            entity: a,
+            height: 0.8,
+            width: 1.75,
+            yoffset: -1,
+            r: 1,
+            g: 77 / 255,
+            b: 77 / 255
+        })
+
+        // sven
+        else if (a.getName().includes("Sven Follower")) minis.push({
+            entity: a,
+            height: 1,
+            width: 1.1,
+            yoffset: -1,
+            // colour
+            r: 1,
+            g: 1,
+            b: 1
+        })
+
+        else if (a.getName().includes("Sven Alpha")) minis.push({
+            entity: a,
+            height: 1,
+            width: 1.1,
+            yoffset: -1,
+            // colour
+            r: 1,
+            g: 0,
+            b: 0
+        })
+    }
+
+    minis.map(m => {
+        if (ChatLib.removeFormatting(m.entity.getName()).match(/( 0❤| 0\/(.+)❤)/) || m.entity.isDead()) minis.splice(getMinisIndex(m.entity), 1)
     })
 }), () => slayerLocationCheck())
 
@@ -41,7 +107,7 @@ registerWhen(register("renderWorld", () => {
     const alpha = settings.fillType == 0 ? 0.727 : 1
 
     minis.forEach(m => {
-        renderFunc(m.x, m.y, m.z, m.width, m.height, m.r, m.g, m.b, alpha, false)
+        renderFunc(m.entity.getRenderX(), m.entity.getRenderY() + m.yoffset, m.entity.getRenderZ(), m.width, m.height, m.r, m.g, m.b, alpha, false)
     })
 }), () => slayerLocationCheck())
 
@@ -50,3 +116,12 @@ registerWhen(register("soundPlay", (pos, name, vol, pitch, cat, event) => {
 
     if (settings.minibossPing) World.playSound("random.orb", 1, 1)
 }), () => slayerLocationCheck() && !slayerFightCheck())
+
+register("command", () => {
+    minis.forEach(m => {
+        if (ChatLib.removeFormatting(m.entity.getName()).match(/( 0❤| 0\/(.+)❤)/)) {
+            ChatLib.chat(`Mini boss ${m.entity.getName()} is dead!`)
+        }
+        else ChatLib.chat(`Mini boss ${m.entity.getName()} is alive!`)
+    })
+}).setName("tm")

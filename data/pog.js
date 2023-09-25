@@ -4,6 +4,9 @@ export let data = new PogObject("Aquila", {
     location: "none",
     area: "none",
     apikey: "none",
+    osu_apikey: "none",
+    last_load: 0,
+    last_unload: 0,
     logo: {
         x: 885,
         y: 20
@@ -15,5 +18,52 @@ export let data = new PogObject("Aquila", {
     hit_phase_location: {
         x: 450,
         y: 280
+    },
+    spam_text_location: {
+        x: 710,
+        y: 390
+    },
+    slayer_overlay_location: {
+        x: 20,
+        y: 50
+    },
+    summons_hp_location: {
+        x: 636,
+        y: 86
+    },
+    slayer: {
+        rev: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        eman: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        sven: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        tara: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        vamp: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        },
+        blaze: {
+            level: 0,
+            xp: 0,
+            remaining: 0
+        }
+    },
+    osu_cache: {
+        beatmaps: {}
     }
 }, "data/data.json")
