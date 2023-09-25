@@ -167,6 +167,7 @@ export const RANKS = {
 
 // salvageable items
 export const SALVAGEABLE = [
+    // armor
     "BOUNCY_",
     "HEAVY_",
     "NECROMANCER_LORD_",
@@ -179,5 +180,25 @@ export const SALVAGEABLE = [
     "ZOMBIE_COMMANDER_",
     "ZOMBIE_KNIGHT_",
     "ZOMBIE_LORD_",
-    "ZOMBIE_SOLDIER_"
+    "ZOMBIE_SOLDIER_",
+    // weapons
+    "MACHINE_GUN_BOW",
+    "CRYPT_BOW",
+    "SNIPER_BOW",
+    "CRYPT_DREADLORD_SWORD",
+    "ZOMBIE_SOLDIER_CUTLASS",
+    "ZOMBIE_KNIGHT_SWORD",
+    "SILENT_DEATH",
+    "EARTH_SHARD",
+    "CONJURING_SWORD",
+    "ZOMBIE_COMMANDER_WHIP",
+    // reforge stones
+    "BEATING_HEART",
+    "PREMIUM_FLESH",
+    "DIAMOND_ATOM",
+    // misc
+    "TRAINING_WEIGHTS",
+    "ENCHANTED_ROTTEN_FLESH",
+    "ENCHANTED_BONE",
+    "DEFUSE_KIT"
 ]
