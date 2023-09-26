@@ -1,5 +1,5 @@
 import settings from "../../settings"
-import { SALVAGEABLE } from "../../utils/constants"
+import { DUNGEON_SELLABLE, SALVAGEABLE } from "../../utils/constants"
 import { registerWhen } from "../../utils/triggers"
 import { getSlotCenter } from "../../utils/utils"
 
@@ -11,10 +11,10 @@ const CONTAINER_NAMES = [
 
 registerWhen(register("guiRender", () => {
     let inv = Player.getContainer()
+    let itemFilter = settings.includeNonSalvageable ? SALVAGEABLE.concat(DUNGEON_SELLABLE) : SALVAGEABLE
     let itemSlots = inv.getItems()
-        .map((item, index) => SALVAGEABLE.some(name => item?.getNBT()?.getCompoundTag("tag")?.getCompoundTag("ExtraAttributes")?.getString("id")?.startsWith(name)) ? index : null)
+        .map((item, index) => itemFilter.some(name => item?.getNBT()?.getCompoundTag("tag")?.getCompoundTag("ExtraAttributes")?.getString("id")?.startsWith(name)) ? index : null)
         .filter(i => i != null)
-    //ChatLib.chat(`Found ${itemSlots.length} items to salvage`)
 
     for (let slot of itemSlots) {
         // prevent rendering on the wrong inventory

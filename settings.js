@@ -50,6 +50,7 @@ class settings {
         this.addDependency("Croesus Overlay Colour", "Croesus Overlay")
 
         this.addDependency("Salvageable Items Colour", "Salvageable Items")
+        this.addDependency("Include non-gear items", "Salvageable Items")
 
         //
         this.setCategoryDescription("osu!",
@@ -183,6 +184,14 @@ Setting a value of ${Colour.RED}0${Format.RESET} will always check for updates w
         subcategory: "Salvage"
     })
     salvageableItems = false;
+
+    @SwitchProperty({
+        name: "Include non-gear items",
+        description: "Highlight includes unsalvageable items like training weights, ench. rotten flesh",
+        category: "Dungeons",
+        subcategory: "Salvage"
+    })
+    includeNonSalvageable = false;
 
     @ColorProperty({
         name: "Salvageable Items Colour",

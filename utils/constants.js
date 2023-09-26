@@ -181,6 +181,7 @@ export const SALVAGEABLE = [
     "ZOMBIE_KNIGHT_",
     "ZOMBIE_LORD_",
     "ZOMBIE_SOLDIER_",
+    "SNIPER_",
     // weapons
     "MACHINE_GUN_BOW",
     "CRYPT_BOW",
@@ -192,14 +193,16 @@ export const SALVAGEABLE = [
     "EARTH_SHARD",
     "CONJURING_SWORD",
     "ZOMBIE_COMMANDER_WHIP",
-    // reforge stones
-    "BEATING_HEART",
-    "PREMIUM_FLESH",
-    "DIAMOND_ATOM",
-    // misc
+]
+
+export const DUNGEON_SELLABLE = [
     "TRAINING_WEIGHTS",
     "ENCHANTED_ROTTEN_FLESH",
     "ENCHANTED_BONE",
     "DEFUSE_KIT",
-    "DUNGEON_LORE_PAPER"
+    "DUNGEON_LORE_PAPER",
+    "ANCIENT_CLAW",
+    "BEATING_HEART",
+    "PREMIUM_FLESH",
+    "DIAMOND_ATOM"
 ]
